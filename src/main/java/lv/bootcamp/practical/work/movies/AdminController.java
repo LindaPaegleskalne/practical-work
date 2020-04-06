@@ -25,76 +25,76 @@ public final CategoryRepository categoryRepository;
     public String admin(Model model){
         model.addAttribute("movies", movieRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
-    @GetMapping("/signupcategory")
+    @GetMapping("/admin/signupcategory")
     public String showSignUpFormCategory(Category category){
-        return "add-category";
+        return "admin/add-category";
     }
 
-    @PostMapping("/addcategory")
+    @PostMapping("/admin/addcategory")
     public String addCategory(@Valid Category category, Model model){
         categoryRepository.save(category);
         model.addAttribute("categories", categoryRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
-    @GetMapping("/editcategory/{id}")
+    @GetMapping("/admin/editcategory/{id}")
     public String showUpdateFormCategory(@PathVariable("id") int id, Model model){
         Category category =  categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         model.addAttribute("category", category);
-        return "update-category";
+        return "admin/update-category";
     }
 
-    @PostMapping("/updatecategory/{id}")
+    @PostMapping("/admin/updatecategory/{id}")
     public String updateCategory (@PathVariable("id") int id, @Valid Category category, Model model) {
         categoryRepository.save(category);
         model.addAttribute("categories", categoryRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
 
-    @GetMapping("/deletecategory/{id}")
+    @GetMapping("/admin/deletecategory/{id}")
     public String deleteCategory(@PathVariable("id") int id, Model model){
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         categoryRepository.delete(category);
         model.addAttribute("categories", categoryRepository.findAll());
-        return "admin";
+        return "admin/index";
 
 
     }
-    @GetMapping("/signupmovie")
+    @GetMapping("/admin/signupmovie")
     public String showSignUpFormMovie(Movie movie){
-        return "add-movie";
+        return "admin/add-movie";
     }
 
-    @PostMapping("/addmovie")
+    @PostMapping("/admin/addmovie")
     public String addMovie(@Valid Movie movie, Model model){
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
-    @GetMapping("/editmovie/{id}")
+    @GetMapping("/admin/editmovie/{id}")
     public String showUpdateFormMovie(@PathVariable("id") int id, Model model){
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         model.addAttribute("movie", movie);
-        return "update-movie";
+        return "admin/update-movie";
     }
 
-    @PostMapping("/updatemovie/{id}")
+    @PostMapping("/admin/updatemovie/{id}")
     public String updateMovie (@PathVariable("id") int id, @Valid Movie movie, Model model) {
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
 
-    @GetMapping("/deletemovie/{id}")
+    @GetMapping("/admin/deletemovie/{id}")
     public String deleteMovie(@PathVariable("id") int id, Model model){
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         movieRepository.delete(movie);
         model.addAttribute("movies", movieRepository.findAll());
-        return "admin";
+        return "admin/index";
     }
 }
