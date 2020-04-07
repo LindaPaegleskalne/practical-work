@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>index</title>
+    <title>Movies page</title>
 </head>
 <body>
+<h2>Movies page</h2>
+
+<tbody>
+<tr th:each="category: ${categories}">
+    <td th:text="${category.name}" /><br>
+</tr>
+</tbody>
+
+<tr th:each="movie : ${movies}">
+    <td th:text="${movie.name}"></td>
+</tr>
 
 </body>
 </html>

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>category</title>
 </head>
 <body>
+<h1>
+<tr th:each="obj : ${model}">
+    <td th:text="${category.id}"></td></h1>
+</tr>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${movies}">
+        <td><span th:text="${movies.name}"> Name </span></td>
+        <td><span th:text="${movies.year}"> Year </span></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
