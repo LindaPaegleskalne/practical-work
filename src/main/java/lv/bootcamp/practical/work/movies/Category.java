@@ -30,8 +30,7 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Movie> getMovies(Integer id) {
-        this.id = id;
+    public Set<Movie> getMovies() {
         return movies;
     }
 

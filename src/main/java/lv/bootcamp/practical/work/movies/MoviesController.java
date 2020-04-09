@@ -27,10 +27,10 @@ public class MoviesController {
     }
 
     @GetMapping("/category/{id}")
-    public String showCategoryList(@PathVariable("id") int id, Model model) {
-        Category category =  categoryRepository.findById(id)
+    public String showCategory(@PathVariable("id") int id, Model model) {
+        Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID: "+ id));
-        model.addAttribute("categories", category.getMovies(id));
+        model.addAttribute("category", category);
         return "category";
     }
 
