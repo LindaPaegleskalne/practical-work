@@ -3,7 +3,7 @@ package lv.bootcamp.practical.work.movies;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "movies")
+@Table(name = "movies",  uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "year"})})
 public class Movie{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

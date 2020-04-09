@@ -22,7 +22,6 @@ public class MoviesController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("movies", movieRepository.findAll());
         return "index";
     }
 
