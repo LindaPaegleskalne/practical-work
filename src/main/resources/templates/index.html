@@ -5,17 +5,18 @@
     <title>Movies page</title>
 </head>
 <body>
-<h2>Movies page</h2>
+<h1>Movies page</h1>
 
-<tbody>
-<tr th:each="category: ${categories}">
-    <td th:text="${category.name}" /><br>
-</tr>
-</tbody>
 
-<tr th:each="movie : ${movies}">
-    <td th:text="${movie.name}"></td>
-</tr>
+<th:block th:each="category : ${categories}">
+    <h2><td th:text="${category.name}" ></h2>
+    <tr th:each="movie : ${category.movies}">
+        <a th:href="@{${movie.linkImdb}}">
+            <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
+        </a>
+
+    </tr>
+</th:block>
 
 </body>
 </html>
