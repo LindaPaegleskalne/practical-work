@@ -3,25 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>category</title>
+    <style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
 </head>
 <body>
-<h1>
-<tr th:each="obj : ${model}">
-    <td th:text="${category.id}"></td></h1>
-</tr>
+<h1>Movies page</h1>
 
+    <h2><td th:text="${category.name}" ></h2>
 
-<table>
+<table style="width:100%">
     <thead>
     <tr>
         <th>Name</th>
         <th>Year</th>
+        <th>Description</th>
+        <th>Rating</th>
+        <th>Poster</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="category : ${movies}">
-        <td><span th:text="${movies.name}"> Name </span></td>
-        <td><span th:text="${movies.year}"> Year </span></td>
+    <tr th:each="movie : ${category.movies}">
+        <td th:text="${movie.name}"></td>
+        <td th:text="${movie.year}"></td>
+        <td th:text="${movie.description}"></td>
+        <td th:text="${movie.rating}"></td>
+        <td>
+            <a th:href="@{${movie.linkImdb}}">
+            <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
