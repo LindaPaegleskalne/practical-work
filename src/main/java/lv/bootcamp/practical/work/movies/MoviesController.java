@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MoviesController {
 
-    private final MovieRepository movieRepository;
     private final CategoryRepository categoryRepository;
 
 
     @Autowired
-    public MoviesController(MovieRepository movieRepository, CategoryRepository categoryRepository) {
-        this.movieRepository = movieRepository;
+    public MoviesController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
