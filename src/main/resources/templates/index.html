@@ -10,7 +10,7 @@
 
 <th:block th:each="category : ${categories}">
     <h2><td th:text="${category.name}" ></h2>
-    <tr th:each="movie : ${category.movies}">
+    <tr th:each="movie, iterStat : ${category.movies}" th:if="${iterStat.index} <5">
         <a th:href="@{${movie.linkImdb}}">
             <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
         </a>
