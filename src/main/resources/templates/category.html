@@ -9,12 +9,22 @@ table, th, td {
   border-collapse: collapse;
 }
 </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 </head>
 <body>
 <h1>Movies page</h1>
 
     <h2><td th:text="${category.name}" ></h2>
 
+<p class="my-5">
+    <form th:action="@{/category/{id}(id = ${category.id})}" method="get">
+        <input type="text" name="search" id="search" th:value="${search}"/>
+        <input type="submit" value="Search"/>
+    </form>
+</p>
+
+<section>
 <table style="width:100%">
     <thead>
     <tr>
@@ -26,7 +36,7 @@ table, th, td {
     </tr>
     </thead>
     <tbody>
-    <tr th:each="movie : ${category.movies}">
+    <tr th:each="movie : ${movies}">
         <td th:text="${movie.name}"></td>
         <td th:text="${movie.year}"></td>
         <td th:text="${movie.description}"></td>
@@ -39,6 +49,7 @@ table, th, td {
     </tr>
     </tbody>
 </table>
+</section>
 
 </body>
 </html>

@@ -6,25 +6,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.Collection;
+
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Controller
 public class AdminController {
-public final MovieRepository movieRepository;
-public final CategoryRepository categoryRepository;
 
-@Autowired
+    public final MovieRepository movieRepository;
+    public final CategoryRepository categoryRepository;
 
+    @Autowired
     public AdminController(MovieRepository movieRepository, CategoryRepository categoryRepository) {
         this.movieRepository = movieRepository;
         this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/admin")
-    public String admin(Model model){
-        model.addAttribute("movies", movieRepository.findAll());
+    public String admin(@RequestParam(required = false) String search, Model model){
+        //model.addAttribute("movies", movieRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
+        Collection<Movie> movies;
+        movies = movieRepository.findByName(search);
+        model.addAttribute("movies", movies);
         return "admin/index";
     }
     @GetMapping("/admin/signupcategory")
