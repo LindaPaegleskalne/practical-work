@@ -1,5 +1,7 @@
 package lv.bootcamp.practical.work.movies;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +13,7 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
 
     @Query(value = "SELECT * FROM movies WHERE name LIKE %:name%",
             nativeQuery = true)
-    Collection<Movie> findByName(@Param("name") String name);
+    Page<Movie> findByName(@Param("name") String name, Pageable pageable);
 
     @Query(value = "SELECT * FROM movies WHERE name LIKE %:name% AND category = :id",
             nativeQuery = true)

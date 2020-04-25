@@ -18,38 +18,42 @@ table, th, td {
     <h2><td th:text="${category.name}" ></h2>
 
 <p class="my-5">
-    <form th:action="@{/category/{id}(id = ${category.id})}" method="get">
-        <input type="text" name="search" id="search" th:value="${search}"/>
-        <input type="submit" value="Search"/>
-    </form>
+<form th:action="@{/category/{id}(id = ${category.id})}" method="get">
+    <input type="text" name="search" id="search" th:value="${search}"/>
+    <input type="submit" value="Search"/>
+</form>
 </p>
 
-<section>
-<table style="width:100%">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Year</th>
-        <th>Description</th>
-        <th>Rating</th>
-        <th>Poster</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="movie : ${movies}">
-        <td th:text="${movie.name}"></td>
-        <td th:text="${movie.year}"></td>
-        <td th:text="${movie.description}"></td>
-        <td th:text="${movie.rating}"></td>
-        <td>
-            <a th:href="@{${movie.linkImdb}}">
-            <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</section>
+<td th:switch="${movies}">
+    <span th:case="NoData">Sorry, there are no movies!</span>
 
+    <div th:case="*">
+
+        <table style="width:100%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Poster</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.name}"></td>
+            <td th:text="${movie.year}"></td>
+            <td th:text="${movie.description}"></td>
+            <td th:text="${movie.rating}"></td>
+            <td>
+                <a th:href="@{${movie.linkImdb}}">
+                <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+</td>
 </body>
 </html>

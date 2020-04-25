@@ -1,6 +1,9 @@
 package lv.bootcamp.practical.work.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Optional;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
@@ -26,14 +30,15 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String admin(@RequestParam(required = false) String search, Model model){
-        //model.addAttribute("movies", movieRepository.findAll());
+    public String admin(@RequestParam Optional<String> search,
+                        @RequestParam Optional<Integer> page, Model model){
         model.addAttribute("categories", categoryRepository.findAll());
-        Collection<Movie> movies;
-        movies = movieRepository.findByName(search);
+        Page<Movie> movies;
+        movies = movieRepository.findByName(search.orElse("_"), PageRequest.of(page.orElse(0),5));
         model.addAttribute("movies", movies);
         return "admin/index";
     }
+
     @GetMapping("/admin/signupcategory")
     public String showSignUpFormCategory(Category category){
         return "admin/add-category";
@@ -45,6 +50,7 @@ public class AdminController {
         model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
     }
+
     @GetMapping("/admin/editcategory/{id}")
     public String showUpdateFormCategory(@PathVariable("id") int id, Model model){
         Category category =  categoryRepository.findById(id)
@@ -67,9 +73,8 @@ public class AdminController {
         categoryRepository.delete(category);
         model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
-
-
     }
+
     @GetMapping("/admin/signupmovie")
     public String showSignUpFormMovie(Movie movie){
         return "admin/add-movie";
@@ -81,6 +86,7 @@ public class AdminController {
         model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }
+
     @GetMapping("/admin/editmovie/{id}")
     public String showUpdateFormMovie(@PathVariable("id") int id, Model model){
         Movie movie = movieRepository.findById(id)

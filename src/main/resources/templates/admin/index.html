@@ -7,6 +7,7 @@
     table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
+        padding: 15px;
     }
     </style>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
@@ -14,49 +15,96 @@
 
 <body>
 <h1>Movies Page</h1>
-<h3>Welcome, admin!</h3>
+<h3>Categories</h3>
 
 <p class="my-5">
-<form th:action="@{/admin}" method="get">
-    <input type="text" name="search" id="search" th:value="${search}"/>
-    <input type="submit" value="Search"/>
-</form>
+    <a title="add category" href="/admin/signupcategory"class="fas fa-plus-square fa-4x">
+        <i class="fas fa-movie-plus-square"></i>
+    </a>
 </p>
 
-<table style="width:100%">
+<table>
     <thead>
     <tr>
         <th>Name</th>
-        <th>Year</th>
-        <th>Description</th>
-        <th>Rating</th>
-        <th>Poster</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="movie : ${movies}">
-        <td th:text="${movie.name}"></td>
-        <td th:text="${movie.year}"></td>
-        <td th:text="${movie.description}"></td>
-        <td th:text="${movie.rating}"></td>
+    <tr align="center" th:each="category : ${categories}">
+        <td th:text="${category.name}"></td>
         <td>
-            <a th:title="${movie.name}" th:href="@{${movie.linkImdb}}">
-                <img th:src="@{${movie.linkPoster}}" width="170" height="290" alt="${movie.name}"/>
-            </a>
-        </td>
-        <td align="center">
-            <a title="edit" th:href="@{/edit/{id}(id=${movie.id})}" class="fas fa-edit fa-lg">
+            <a title="edit" th:href="@{/admin/editcategory/{id}(id=${category.id})}" class="fas fa-edit fa-lg">
                 <i class="icon-fixed-width icon-pencil"></i>
             </a>
         </td>
-        <td align="center">
-            <a title="delete" th:href="@{/delete/{id}(id=${movie.id})}" class="fas fa-trash-alt fa-lg">
+        <td>
+            <a title="delete" th:href="@{/admin/deletecategory/{id}(id=${category.id})}" class="fas fa-trash-alt fa-lg">
                 <i class="fas fa-movie-trash-alt fa-2x"></i></a>
         </td>
     </tr>
     </tbody>
 </table>
+
+<hr>
+
+<h3>Movies</h3>
+
+<p class="my-5">
+    <a title="add movie" href="/admin/signupmovie"class="fas fa-plus-square fa-4x">
+        <i class="fas fa-movie-plus-square"></i>
+    </a>
+</p>
+
+<p class="my-5">
+<form th:action="@{/admin}" method="get">
+    <input type="text" name="search" id="search" th:value="${search}"/>
+    <input type="submit" value="Search movies"/>
+</form>
+</p>
+
+<div class="pagination_section">
+    <a href="#"><< Previous</a>
+    <a href="#">Next >></a>
+</div>
+
+<table style="width:100%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Poster</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr align="center" th:each="movie : ${movies}">
+            <td th:text="${movie.name}"></td>
+            <td th:text="${movie.year}"></td>
+            <td th:text="${movie.description}"></td>
+            <td th:text="${movie.rating}"></td>
+            <td style="padding:5px">
+                <a th:title="${movie.name}" th:href="@{${movie.linkImdb}}">
+                    <img th:src="@{${movie.linkPoster}}" width="100" height="190" alt="${movie.name}"/>
+                </a>
+            </td>
+            <td>
+                <a title="edit" th:href="@{/admin/editmovie/{id}(id=${movie.id})}" class="fas fa-edit fa-lg">
+                    <i class="icon-fixed-width icon-pencil"></i>
+                </a>
+            </td>
+            <td>
+                <a title="delete" th:href="@{/admin/deletemovie/{id}(id=${movie.id})}" class="fas fa-trash-alt fa-lg">
+                    <i class="fas fa-movie-trash-alt fa-2x"></i></a>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+</td>
 </body>
 </html>
