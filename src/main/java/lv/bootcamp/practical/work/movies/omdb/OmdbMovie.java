@@ -1,8 +1,13 @@
 package lv.bootcamp.practical.work.movies.omdb;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lv.bootcamp.practical.work.movies.Movie;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @JsonNaming(PropertyNamingStrategy.UpperCamelCaseStrategy.class)
 
@@ -10,7 +15,8 @@ public class OmdbMovie {
     @JsonProperty("Title")
     private String title;
     @JsonProperty("Year")
-    private int year;
+    private short year;
+    @JsonProperty("imdbID")
     private String imdbID;
     @JsonProperty("Type")
     private String type;
@@ -25,11 +31,11 @@ public class OmdbMovie {
         this.title = title;
     }
 
-    public int getYear() {
+    public short getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(short year) {
         this.year = year;
     }
 
@@ -55,6 +61,14 @@ public class OmdbMovie {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+    public Movie addOmdbMovie(){
+        Movie movie = new Movie();
+        movie.setName(this.title);
+        movie.setYear(this.year);
+        movie.setLinkImdb("https://www.imdb.com/title/" + this.imdbID);
+        movie.setLinkPoster(this.poster);
+        return movie;
     }
 }
 

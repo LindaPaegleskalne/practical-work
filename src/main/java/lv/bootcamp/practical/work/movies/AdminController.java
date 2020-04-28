@@ -1,5 +1,8 @@
 package lv.bootcamp.practical.work.movies;
 
+import lv.bootcamp.practical.work.movies.omdb.OmdbMovie;
+import lv.bootcamp.practical.work.movies.omdb.OmdbResponse;
+import lv.bootcamp.practical.work.movies.omdb.OmdbSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +25,14 @@ public class AdminController {
 
     public final MovieRepository movieRepository;
     public final CategoryRepository categoryRepository;
+    private OmdbSearchService omdbSearchService;
+    private OmdbResponse omdbResponse;
 
     @Autowired
-    public AdminController(MovieRepository movieRepository, CategoryRepository categoryRepository) {
+    public AdminController(MovieRepository movieRepository, CategoryRepository categoryRepository, OmdbSearchService omdbSearchService) {
         this.movieRepository = movieRepository;
         this.categoryRepository = categoryRepository;
+        this.omdbSearchService = omdbSearchService;
     }
 
     @GetMapping("/admin")
@@ -54,7 +60,7 @@ public class AdminController {
     @GetMapping("/admin/editcategory/{id}")
     public String showUpdateFormCategory(@PathVariable("id") int id, Model model){
         Category category =  categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
         model.addAttribute("category", category);
         return "admin/update-category";
     }
@@ -69,7 +75,7 @@ public class AdminController {
     @GetMapping("/admin/deletecategory/{id}")
     public String deleteCategory(@PathVariable("id") int id, Model model){
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
         categoryRepository.delete(category);
         model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
@@ -107,6 +113,27 @@ public class AdminController {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         movieRepository.delete(movie);
+        model.addAttribute("movies", movieRepository.findAll());
+        return "admin/index";
+    }
+    @GetMapping("/admin/omdbmoviesearch")
+    public String omdbMovieSearch(@RequestParam(required = false) String search, Model model){
+        omdbResponse = omdbSearchService.searchMovies(search);
+        model.addAttribute("omdbMovies", omdbResponse.getSearch());
+        return "admin/omdb-movies";
+    }
+
+    @GetMapping("/admin/editomdbmovie/{title}")
+    public String showUpdateFormOmdbMovie(@PathVariable("title") String title, Model model){
+        OmdbMovie omdbMovie = omdbResponse.searchByTitle(title);
+        model.addAttribute("movie", omdbMovie.addOmdbMovie());
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "admin/add-omdb-movie";
+    }
+
+    @PostMapping("/admin/addomdbmovie/{title}")
+    public String addOmdbMovie ( @PathVariable("title") String title, @Valid Movie movie, Model model) {
+        movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }

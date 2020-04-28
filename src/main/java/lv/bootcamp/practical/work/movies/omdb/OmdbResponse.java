@@ -1,20 +1,27 @@
 package lv.bootcamp.practical.work.movies.omdb;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class OmdbResponse {
-    private List<OmdbMovie> omdbMovieList;
+    @JsonProperty("Search")
+  private List<OmdbMovie> search;
 
-    public OmdbResponse() {
-        omdbMovieList= new ArrayList<>();
+    public List<OmdbMovie> getSearch() {
+        return search;
     }
 
-    public List<OmdbMovie> getOmdbMovieList() {
-        return omdbMovieList;
+    public void setSearch(List<OmdbMovie> search) {
+        this.search = search;
     }
-
-    public void setOmdbMovieList(List<OmdbMovie> omdbMovieList) {
-        this.omdbMovieList = omdbMovieList;
+    public OmdbMovie searchByTitle(String title){
+        for( OmdbMovie movie : search){
+            if(movie.getTitle().equals(title)){
+                return movie;
+            }
+        }
+        return null;
     }
 }

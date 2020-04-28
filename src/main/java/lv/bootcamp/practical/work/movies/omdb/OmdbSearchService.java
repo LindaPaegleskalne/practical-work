@@ -15,14 +15,15 @@ public class OmdbSearchService {
         this.restTemplate = restTemplate;
     }
 
-    public List<OmdbMovie> searchMovies(String search){
+    public OmdbResponse searchMovies(String search){
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("http").host("www.omdbapi.com")
                 .queryParam("apikey", "d4df4065")
                 .queryParam("s", search)
                 .build();
 
+        OmdbResponse response = restTemplate.getForObject(uri.toUriString(), OmdbResponse.class);
+        return response;
 
-        return restTemplate.getForObject(uri.toUriString(), OmdbResponse.class).getOmdbMovieList();
     }
 }
