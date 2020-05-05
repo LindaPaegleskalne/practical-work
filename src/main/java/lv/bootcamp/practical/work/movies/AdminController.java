@@ -79,7 +79,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/signupmovie")
-    public String showSignUpFormMovie(Movie movie){
+    public String showSignUpFormMovie(Movie movie, Model model){
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/add-movie";
     }
 
@@ -95,6 +96,7 @@ public class AdminController {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         model.addAttribute("movie", movie);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/update-movie";
     }
 
