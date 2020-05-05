@@ -16,6 +16,9 @@
     INSERT INTO categories
     VALUES (6, "Thriller");
 
+    INSERT INTO categories
+    VALUES (7, "Adventure");
+
 
 	INSERT INTO movies
 	VALUES (1,
@@ -360,8 +363,7 @@
 
 	INSERT INTO movies
 	VALUES (29,
-	"
-	Star Wars: Episode V - The Empire Strikes Back",
+	"Star Wars: Episode V - The Empire Strikes Back",
 	1980,
 	"After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke
 	Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader

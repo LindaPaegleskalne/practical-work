@@ -13,12 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.Optional;
 
-import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Controller
 public class AdminController {
@@ -39,8 +36,8 @@ public class AdminController {
     public String admin(@RequestParam Optional<String> search,
                         @RequestParam Optional<Integer> page, Model model){
         model.addAttribute("categories", categoryRepository.findAll());
-        Page<Movie> movies;
-        movies = movieRepository.findByName(search.orElse("_"), PageRequest.of(page.orElse(0),5));
+        Page<Movie> movies = movieRepository.findByName(search.orElse("_"),
+                PageRequest.of(page.orElse(0),5, Sort.by("name")));
         model.addAttribute("movies", movies);
         return "admin/index";
     }

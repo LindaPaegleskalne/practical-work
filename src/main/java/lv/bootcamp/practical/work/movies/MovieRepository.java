@@ -13,7 +13,7 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
 
     @Query(value = "SELECT * FROM movies WHERE name LIKE %:name%",
             nativeQuery = true)
-    Page<Movie> findByName(@Param("name") String name, Pageable pageable);
+    Page<Movie> findByName(@Param("name") String name, Pageable pageRequest);
 
     @Query(value = "SELECT * FROM movies WHERE name LIKE %:name% AND category = :id",
             nativeQuery = true)

@@ -72,6 +72,7 @@
 <table style="width:100%">
         <thead>
         <tr>
+            <th>Category</th>
             <th>Name</th>
             <th>Year</th>
             <th>Description</th>
@@ -83,13 +84,14 @@
         </thead>
         <tbody>
         <tr align="center" th:each="movie : ${movies}">
+            <td th:text="${movie.category.name}"></td>
             <td th:text="${movie.name}"></td>
             <td th:text="${movie.year}"></td>
             <td th:text="${movie.description}"></td>
             <td th:text="${movie.rating}"></td>
             <td style="padding:5px">
                 <a th:title="${movie.name}" th:href="@{${movie.linkImdb}}">
-                    <img th:src="@{${movie.linkPoster}}" width="100" height="190" alt="${movie.name}"/>
+                    <img th:src="@{${movie.linkPoster}}" width="80" height="150" alt="${movie.name}"/>
                 </a>
             </td>
             <td>
