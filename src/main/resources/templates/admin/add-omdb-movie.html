@@ -20,17 +20,18 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Year</label>
-                        <input type="number" th:field="*{year}" class="form-control" id="year"
+                        <input type="number" step="1" min="1888" max="2020" th:field="*{year}" class="form-control" id="year"
                                placeholder="Year">
+
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Description</label>
-                        <input type="text"  class="form-control" id="description"
+                        <input type="text" th:field="*{description}" class="form-control" id="description"
                                placeholder="Description">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Rating</label>
-                        <input type="number" step="0.1" min="1" max="10"  class="form-control" id="rating"
+                        <input type="number" step="0.1" min="1" max="10" th:field="*{rating}" class="form-control" id="rating"
                                placeholder="Rating">
                     </div>
                     <div class="form-group col-md-6">
@@ -44,6 +45,7 @@
                                placeholder="Imdb link">
                     </div>
                     <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Category</label>
                         <select  class="form-control" id="category" name="category">
                         <option value="">Select category</option>
                         <option
@@ -52,11 +54,12 @@
                                 th:text="${category.name}">
 
                         </option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Add Omdb Movie">
+                        <input type="submit" class="btn btn-primary" value="Add Movie">
                     </div>
                 </div>
             </form>
