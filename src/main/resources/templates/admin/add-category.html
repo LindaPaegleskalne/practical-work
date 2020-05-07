@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>add-category</title>
 </head>
 <body>
+<div class="container my-5">
+    <h2 class="mb-5">Add Category</h2>
+    <div class="row">
+        <form class="col-md-6">
+            <form action="#" th:action="@{/admin/addcategory}" th:object="${category}"
+                  method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name"
+                               placeholder="Name">
+                    </div>
+                </div>
 
+                <div class="col-md-6 mt-5">
+                    <input type="submit" class="btn btn-primary" value="Add Category">
+                </div>
+            </form>
+        </form>
+    </div>
+</div>
 </body>
 </html>
