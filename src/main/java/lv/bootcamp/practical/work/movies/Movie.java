@@ -9,7 +9,7 @@ public class Movie{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private short year;
+    private Short year;
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
     private Float rating;
@@ -21,11 +21,11 @@ public class Movie{
     @JoinColumn(name = "category")
     private Category category;
 
-    public int getId() {
+      public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,11 +37,11 @@ public class Movie{
         this.name = name;
     }
 
-    public short getYear() {
+    public Short getYear() {
         return year;
     }
 
-    public void setYear(short year) {
+    public void setYear(Short year) {
         this.year = year;
     }
 
