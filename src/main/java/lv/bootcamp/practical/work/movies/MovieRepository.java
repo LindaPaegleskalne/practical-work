@@ -11,11 +11,11 @@ import java.util.Collection;
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
 
-    @Query(value = "SELECT * FROM movies WHERE name LIKE %:name%",
+    @Query(value = "SELECT * FROM movies WHERE (:name is null or name LIKE %:name%)",
             nativeQuery = true)
     Page<Movie> findByName(@Param("name") String name, Pageable pageRequest);
 
-    @Query(value = "SELECT * FROM movies WHERE name LIKE %:name% AND category = :id",
+    @Query(value = "SELECT * FROM movies WHERE (:name is null or name LIKE %:name% AND category = :id)",
             nativeQuery = true)
     Collection<Movie> findByNameAndId(@Param("name") String name, @Param("id") Integer category);
 

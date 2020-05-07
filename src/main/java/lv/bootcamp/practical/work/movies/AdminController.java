@@ -4,8 +4,8 @@ import lv.bootcamp.practical.work.movies.omdb.OmdbMovie;
 import lv.bootcamp.practical.work.movies.omdb.OmdbResponse;
 import lv.bootcamp.practical.work.movies.omdb.OmdbSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +20,9 @@ import java.util.Optional;
 @Controller
 public class AdminController {
 
+    private static final Integer DEFAULT_PAGE_NR = 1;
+    private static final Integer DEFAULT_PAGE_SIZE = 5;
+
     public final MovieRepository movieRepository;
     public final CategoryRepository categoryRepository;
     private OmdbSearchService omdbSearchService;
@@ -33,12 +36,13 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String admin(@RequestParam Optional<String> search,
-                        @RequestParam Optional<Integer> page, Model model){
+    public String admin(@RequestParam(required = false) String search, Model model,
+                        @RequestParam(required = false) Optional<Integer> page){
         model.addAttribute("categories", categoryRepository.findAll());
-        Page<Movie> movies = movieRepository.findByName(search.orElse("_"),
-                PageRequest.of(page.orElse(0),5, Sort.by("name")));
-        model.addAttribute("movies", movies);
+        Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
+                DEFAULT_PAGE_SIZE, Sort.by("name"));
+        model.addAttribute("movies", movieRepository.findByName(search, pageable));
+        model.addAttribute("searchStr", search);
         return "admin/index";
     }
 
@@ -113,6 +117,7 @@ public class AdminController {
         model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }
+
     @GetMapping("/admin/omdbmoviesearch")
     public String omdbMovieSearch(@RequestParam(required = false) String search, Model model){
         omdbResponse = omdbSearchService.searchMovies(search);
