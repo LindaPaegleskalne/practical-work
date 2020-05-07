@@ -51,6 +51,7 @@ public class AdminController {
     public String addCategory(@Valid Category category, Model model){
         categoryRepository.save(category);
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }
 
@@ -66,6 +67,7 @@ public class AdminController {
     public String updateCategory (@PathVariable("id") int id, @Valid Category category, Model model) {
         categoryRepository.save(category);
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }
 
@@ -75,6 +77,7 @@ public class AdminController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
         categoryRepository.delete(category);
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("movies", movieRepository.findAll());
         return "admin/index";
     }
 
@@ -88,6 +91,7 @@ public class AdminController {
     public String addMovie(@Valid Movie movie, Model model){
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
     }
 
@@ -104,6 +108,7 @@ public class AdminController {
     public String updateMovie (@PathVariable("id") int id, @Valid Movie movie, Model model) {
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
     }
 
@@ -113,6 +118,7 @@ public class AdminController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
         movieRepository.delete(movie);
         model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
     }
     @GetMapping("/admin/omdbmoviesearch")
@@ -134,6 +140,7 @@ public class AdminController {
     public String addOmdbMovie ( @PathVariable("title") String title, @Valid Movie movie, Model model) {
         movieRepository.save(movie);
         model.addAttribute("movies", movieRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "admin/index";
     }
 }

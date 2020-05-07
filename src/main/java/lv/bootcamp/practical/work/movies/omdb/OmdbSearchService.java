@@ -19,6 +19,7 @@ public class OmdbSearchService {
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("http").host("www.omdbapi.com")
                 .queryParam("apikey", "d4df4065")
+                .queryParam("type", "movie")
                 .queryParam("s", search)
                 .build();
 
