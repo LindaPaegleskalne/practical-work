@@ -1,4 +1,4 @@
-package lv.bootcamp.practical.work.Service;
+package lv.bootcamp.practical.work.service;
 
 import lv.bootcamp.practical.work.movies.Category;
 import lv.bootcamp.practical.work.movies.CategoryRepository;
@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import java.util.Optional;
 
 @Service
@@ -47,19 +45,9 @@ public class AdminService {
         return category;
     }
 
-
-//    public Iterable<Movie> findAllMovie(String search, Optional<Integer> page) {
-//        return movieRepository.findAll();
-//    }
-
-//    public Page<Movie> findByNameMovie(String search, Pageable pageable) {
-//        return movieRepository.findByName(search, pageable);
-//    }
-
-    public Page<Movie> startPage(String search, Model model, Optional<Integer> page) {
+    public Page<Movie> startPage(String search, Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
                 DEFAULT_PAGE_SIZE, Sort.by("name"));
-        model.addAttribute("searchStr", search);
         return movieRepository.findByName(search, pageable);
     }
 

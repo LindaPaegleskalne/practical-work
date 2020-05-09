@@ -1,9 +1,9 @@
 package lv.bootcamp.practical.work.movies;
 
-import lv.bootcamp.practical.work.Service.AdminService;
+import lv.bootcamp.practical.work.service.AdminService;
 import lv.bootcamp.practical.work.movies.omdb.OmdbMovie;
 import lv.bootcamp.practical.work.movies.omdb.OmdbResponse;
-import lv.bootcamp.practical.work.Service.OmdbSearchService;
+import lv.bootcamp.practical.work.service.OmdbSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +32,8 @@ public class AdminController {
     public String admin(@RequestParam(required = false) String search, Model model,
                         @RequestParam(required = false) Optional<Integer> page){
         model.addAttribute("categories", adminService.findAllCategory());
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("searchStr", search);
+        model.addAttribute("movies", adminService.startPage(search, page));
         return "admin/index";
     }
 
@@ -46,7 +47,8 @@ public class AdminController {
                               @RequestParam(required = false) String search,
                              @RequestParam(required = false) Optional<Integer> page){
         adminService.createCategory(category);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -63,7 +65,8 @@ public class AdminController {
                                   @RequestParam(required = false) String search,
                                   @RequestParam(required = false) Optional<Integer> page) {
         adminService.createCategory(category);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -74,7 +77,8 @@ public class AdminController {
                                  @RequestParam(required = false) Optional<Integer> page){
         Category category = adminService.findByIdCategory(id);
         adminService.deleteCategory(category);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -90,7 +94,8 @@ public class AdminController {
                            @RequestParam(required = false) String search,
                            @RequestParam(required = false) Optional<Integer> page){
         adminService.createMovie(movie);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -108,7 +113,8 @@ public class AdminController {
                                @RequestParam(required = false) String search,
                                @RequestParam(required = false) Optional<Integer> page) {
         adminService.createMovie(movie);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -119,7 +125,8 @@ public class AdminController {
                               @RequestParam(required = false) Optional<Integer> page){
         Movie movie = adminService.findByIdMovie(id);
         adminService.deleteMovie(movie);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
@@ -144,7 +151,8 @@ public class AdminController {
                                  @RequestParam(required = false) String search,
                                  @RequestParam(required = false) Optional<Integer> page) {
         adminService.createMovie(movie);
-        model.addAttribute("movies", adminService.startPage(search, model, page));
+        model.addAttribute("movies", adminService.startPage(search, page));
+        model.addAttribute("searchStr", search);
         model.addAttribute("categories", adminService.findAllCategory());
         return "admin/index";
     }
