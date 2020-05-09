@@ -24,10 +24,9 @@ table, th, td {
 </form>
 </p>
 
-<td th:switch="${movies}">
-    <span th:case="NoData">Sorry, there are no movies!</span>
+    <span th:if="${#lists.isEmpty(movies)}">Sorry, there are no movies!</span>
 
-    <div th:case="*">
+    <span th:unless="${#lists.isEmpty(movies)}">
 
         <table style="width:100%">
         <thead>
@@ -53,6 +52,7 @@ table, th, td {
         </tr>
         </tbody>
         </table>
+    </span>
     </div>
 </td>
 </body>

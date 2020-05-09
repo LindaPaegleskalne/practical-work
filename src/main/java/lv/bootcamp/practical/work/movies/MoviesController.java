@@ -19,14 +19,15 @@ public class MoviesController {
 
     @GetMapping("/")
     public String index(Model model) {
-        movieService.printMovies(model);
+        model.addAttribute("categories", movieService.findAllCategories());
         return "index";
     }
 
     @GetMapping("/category/{id}")
     public String showCategory(@PathVariable("id") int id,
                                @RequestParam(required = false) String search, Model model) {
-        movieService.printMoviesByCategory(id,search, model);
+        model.addAttribute("category", movieService.findCategory(id));
+        model.addAttribute("movies", movieService.findMoviesByCategory(id,search ));
         return "category";
     }
 

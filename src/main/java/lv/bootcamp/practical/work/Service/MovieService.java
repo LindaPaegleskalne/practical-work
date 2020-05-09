@@ -24,26 +24,21 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public void printMovies(Model model) {
-        model.addAttribute("categories", categoryRepository.findAll());
+    public Iterable<Category> findAllCategories() {
+        return categoryRepository.findAll();
     }
-
-    public void printMoviesByCategory(int id, String search, Model model){
+    public Category findCategory(int id){
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID: "+ id));
-        model.addAttribute("category", category);
-
+        return category;
+    }
+    public Iterable<Movie> findMoviesByCategory(int id, String search){
         Collection<Movie> movies;
         if (isBlank(search)) {
             movies = movieRepository.findByCategoryId(id);
         } else {
             movies = movieRepository.findByNameAndId(search, id);
         }
-
-        if(movies.isEmpty()){
-            model.addAttribute("movies","NoData");
-        }else{
-            model.addAttribute("movies", movies);
-        }
+        return movies;
     }
 }
