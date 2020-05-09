@@ -1,11 +1,10 @@
-package lv.bootcamp.practical.work.movies.omdb;
+package lv.bootcamp.practical.work.Service;
 
+import lv.bootcamp.practical.work.movies.omdb.OmdbResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @Service
 public class OmdbSearchService {
