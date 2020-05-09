@@ -1,4 +1,4 @@
-package lv.bootcamp.practical.work.movies.omdb;
+package lv.bootcamp.practical.work.omdb;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

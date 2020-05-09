@@ -1,5 +1,7 @@
 package lv.bootcamp.practical.work.movies;
 
+import lv.bootcamp.practical.work.categories.Category;
+
 import javax.persistence.*;
 
 @Entity

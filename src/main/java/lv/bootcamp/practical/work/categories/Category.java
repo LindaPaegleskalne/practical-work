@@ -1,4 +1,6 @@
-package lv.bootcamp.practical.work.movies;
+package lv.bootcamp.practical.work.categories;
+
+import lv.bootcamp.practical.work.movies.Movie;
 
 import javax.persistence.*;
 import java.util.Set;

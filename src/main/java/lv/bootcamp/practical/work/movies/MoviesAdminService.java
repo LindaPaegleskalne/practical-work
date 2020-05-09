@@ -1,7 +1,7 @@
-package lv.bootcamp.practical.work.service;
+package lv.bootcamp.practical.work.movies;
 
-import lv.bootcamp.practical.work.movies.Category;
-import lv.bootcamp.practical.work.movies.CategoryRepository;
+import lv.bootcamp.practical.work.categories.Category;
+import lv.bootcamp.practical.work.categories.CategoryRepository;
 import lv.bootcamp.practical.work.movies.Movie;
 import lv.bootcamp.practical.work.movies.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class AdminService {
+public class MoviesAdminService {
     private static final Integer DEFAULT_PAGE_NR = 1;
     private static final Integer DEFAULT_PAGE_SIZE = 5;
 
@@ -21,34 +21,21 @@ public class AdminService {
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public AdminService(MovieRepository movieRepository, CategoryRepository categoryRepository) {
+    public MoviesAdminService(MovieRepository movieRepository, CategoryRepository categoryRepository) {
         this.movieRepository = movieRepository;
         this.categoryRepository = categoryRepository;
     }
 
-    public Iterable<Category> findAllCategory() {
-        return categoryRepository.findAll();
-    }
 
-    public Category findByIdCategory(Integer id) {
-        return categoryRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
-    }
-
-    public Category createCategory(Category category) {
-        categoryRepository.save(category);
-        return category;
-    }
-
-    public Category deleteCategory(Category category) {
-        categoryRepository.delete(category);
-        return category;
-    }
 
     public Page<Movie> startPage(String search, Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
                 DEFAULT_PAGE_SIZE, Sort.by("name"));
         return movieRepository.findByName(search, pageable);
+    }
+    public Page<Movie> defaultStartPage() {
+        Pageable pageable = PageRequest.of(DEFAULT_PAGE_NR - 1, DEFAULT_PAGE_SIZE, Sort.by("name"));
+        return movieRepository.findByName("", pageable);
     }
 
     public Movie findByIdMovie(Integer id) {
