@@ -3,7 +3,7 @@ package lv.bootcamp.practical.work.movies;
 import lv.bootcamp.practical.work.Service.AdminService;
 import lv.bootcamp.practical.work.movies.omdb.OmdbMovie;
 import lv.bootcamp.practical.work.movies.omdb.OmdbResponse;
-import lv.bootcamp.practical.work.movies.omdb.OmdbSearchService;
+import lv.bootcamp.practical.work.Service.OmdbSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
