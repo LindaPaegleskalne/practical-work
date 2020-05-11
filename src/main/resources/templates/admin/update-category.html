@@ -8,7 +8,7 @@
 <div class="container my-5">
     <h2 class="mb-5">Update Category</h2>
     <div class="row">
-        <form class="col-md-6">
+        <div class="col-md-6">
             <form action="#" th:action="@{/admin/updatecategory/{id}}" th:object="${category}"
                   method="post">
                 <div class="row">
@@ -23,7 +23,7 @@
                     <input type="submit" class="btn btn-primary" value="Update Category">
                 </div>
             </form>
-        </form>
+        </div>
     </div>
 </div>
 </body>
