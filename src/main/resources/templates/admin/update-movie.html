@@ -47,7 +47,7 @@
                         <label for="name" class="col-form-label">Category</label>
 
                         <select  class="form-control" id="category" name="category">
-                            <option value="" th:text="${movie.category.name}"></option>
+                            <option selected=""  th:value="${movie.category.id}" th:text="${movie.category.name}"></option>
                             <option
                                     th:each="category : ${categories}"
                                     th:value="${category.id}"
