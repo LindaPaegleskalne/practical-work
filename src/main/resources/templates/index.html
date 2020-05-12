@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Movies page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <h1>Movies page</h1>
 
 <th:block th:each="category : ${categories}">
     <h2><a th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
+    <span th:if="${#lists.isEmpty(category.movies)}">Sorry, there are no movies in this category!</span>
+
+    <span th:unless="${#lists.isEmpty(category.movies)}">
     <tr th:each="movie, iterStat : ${category.movies}" th:if="${iterStat.index} <5">
         <a th:href="@{${movie.linkImdb}}">
             <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
         </a>
 
     </tr>
+    </span>
 </th:block>
 
 </body>

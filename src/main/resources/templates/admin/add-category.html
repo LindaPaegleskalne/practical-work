@@ -2,25 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>add-category</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <div class="container my-5">
     <h2 class="mb-5">Add Category</h2>
+    <div id="topnav" style="text-align:right;" >
+        <a th:href="@{/admin}">admin main</a>
+        <a th:href="@{/admin/signupmovie}">add movie</a>
+        <a th:href="@{/admin/signupcategory}">add category</a>
+    </div>
     <div class="row">
-        <div id="topnav">
-            <a th:href="@{/admin}">admin main</a>
-            <a th:href="@{/admin/signupmovie}">add movie</a>
-            <a th:href="@{/admin/signupcategory}">add category</a>
-        </div>
         <div class="col-md-6">
             <form action="#" th:action="@{/admin/addcategory}" th:object="${category}"
                   method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">Category name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="name"
-                               placeholder="Name">
+                               placeholder="Enter a genre">
                     </div>
                 </div>
 
