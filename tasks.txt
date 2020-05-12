@@ -1,0 +1,18 @@
+* Vajadzētu piestrādāt pie lapas vizuālā izskata. Lapas galvenajai daļai būtu jābūt pa vidu ar fiksētu platumu
+   un nocentrētam. (margin: 0 auto;). Vajag arī normālu fonu. Stilošanas prioritātes:
+    1. Galvenā lapa (lietotājs redz filmas pa kategorijām)
+        tur vajag arī nosaukumu pielikt. Līdzīgi kā IMDB.
+    2. Tad kategoriju skats, kur lietotājs nonāk, kad atver filmu.
+    3. Pēc tam var turpināt ar admin daļu. kategoriju un filmu rediģēšana.
+        a. Kategory un movie update / create formas
+        b. movie admin lapa
+* atsevišķu lapu filmai, kur lietotājs nonāk kad uzklikšķina uz filmas (nevis linku uz IMDB)
+* meklēšanu galvenajai lapai (līdzīgi kā imdb ir augšā meklēšana)
+* filmu skatījumu / klikšķu saglabāšana datubāzē
+* Galvenajā lapā izvadam populārākās filmas
+
+* sīkumi:
+  - uzspiežot uz pagination lappuses, lai atverot jauno lapu aiziet uz tabulu.
+      (to var panākt izmantojot # linkā)
+  - HTML validācija, kur tas iespējams
+  - var pielikt / nostilot kļūdas lapu
