@@ -61,6 +61,7 @@
 
                         </option>
                         </select>
+                        <span th:if = "${#fields.hasErrors('category')}" th:errors = "*{category}" class = "input-error" />
                     </div>
                 </div>
                 <div class="row">
