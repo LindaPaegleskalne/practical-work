@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.support.BindingAwareConcurrentModel;
 import static org.assertj.core.api.Assertions.*;
 import static java.util.Arrays.asList;
@@ -50,15 +51,18 @@ class MoviesAdminControllerTest {
     @Test
     void addMovieTest() {
         Model model = new BindingAwareConcurrentModel();
+        BindingResult bindingResult = mock(BindingResult.class);
 
         Movie movie = movie(1, "A", (short) 2000, 4.0f,
                 "aaa", "link1", "link2", category(1, "s"));
 
+        when(bindingResult.hasErrors()).thenReturn(false);
         when(moviesAdminService.createMovie(movie)).thenReturn(movie);
 
-        String actual = moviesAdminController.addMovie(movie, model);
+        String actual = moviesAdminController.addMovie(movie, bindingResult, model);
         assertThat(actual).isEqualTo("admin/index");
 
+        verify(bindingResult).hasErrors();
         verify(moviesAdminService).createMovie(movie);
     }
 
@@ -82,16 +86,19 @@ class MoviesAdminControllerTest {
     @Test
     void updateMovie() {
         Model model = new BindingAwareConcurrentModel();
+        BindingResult bindingResult = mock(BindingResult.class);
         Integer id = 1;
 
         Movie movie = movie(id, "A", (short) 2000, 4.0f,
                 "aaa", "link1", "link2", category(1, "s"));
 
+        when(bindingResult.hasErrors()).thenReturn(false);
         when(moviesAdminService.createMovie(movie)).thenReturn(movie);
 
-        String actual = moviesAdminController.updateMovie(id, movie, model);
+        String actual = moviesAdminController.updateMovie(id, movie, bindingResult, model);
         assertThat(actual).isEqualTo("admin/index");
 
+        verify(bindingResult).hasErrors();
         verify(moviesAdminService).createMovie(movie);
     }
 
