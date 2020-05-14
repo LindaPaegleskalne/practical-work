@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>update-category</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <div class="container my-5">
     <h2 class="mb-5">Update Category</h2>
     <div class="row">
-        <form class="col-md-6">
+        <div class="col-md-6">
             <form action="#" th:action="@{/admin/updatecategory/{id}}" th:object="${category}"
                   method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">Category name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="name"
                                placeholder="Name">
                     </div>
@@ -23,7 +24,7 @@
                     <input type="submit" class="btn btn-primary" value="Update Category">
                 </div>
             </form>
-        </form>
+        </div>
     </div>
 </div>
 </body>
