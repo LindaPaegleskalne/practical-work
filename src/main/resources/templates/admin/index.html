@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 
-<body>
+<body data-spy="scroll" data-offset="60" data-target="#myNavbar">
 <h1>Movies Page</h1>
 <h3>Categories</h3>
 
@@ -65,23 +65,23 @@
 </form>
 </p>
 
-<nav aria-label="Pagination" th:if="${movies.totalPages gt 0}">
+<nav id="myNavbar" aria-label="Pagination" th:if="${movies.totalPages gt 0}">
     <ul class="pagination justify-content-center font-weight-bold">
         <li class="page-item" th:classappend="${movies.number eq 0} ? 'disabled'">
             <a class="page-link"
-               th:href="@{/admin?(page=${movies.number lt 2 ? 1 : movies.number},search=${searchStr})}"
+               th:href="@{/admin#myNavbar(page=${movies.number lt 2 ? 1 : movies.number},search=${searchStr})}"
                aria-label="Previous" title="Previous Page" data-toggle="tooltip">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item" th:classappend="${i eq movies.number + 1} ? 'active'"
             th:each="i : ${#numbers.sequence( 1, movies.totalPages, 1)}">
-            <a class="page-link" th:href="@{/admin(page=${i},search=${searchStr})}" th:text="${i}"
+            <a class="page-link" th:href="@{/admin#myNavbar(page=${i},search=${searchStr})}" th:text="${i}"
                th:title="${'Page '+ i}" data-toggle="tooltip"></a>
         </li>
         <li class="page-item" th:classappend="${movies.number + 1 eq movies.totalPages} ? 'disabled'">
             <a class="page-link"
-               th:href="@{/admin(page=${movies.number + 2},search=${searchStr})}"
+               th:href="@{/admin#myNavbar(page=${movies.number + 2},search=${searchStr})}"
                aria-label="Next" title="Next Page" data-toggle="tooltip">
                 <span aria-hidden="true">&raquo;</span>
             </a>
@@ -93,6 +93,7 @@
     <th:block th:text="${movies.totalElements}"></th:block><p>movies found</p>
 </div>
 
+<div id="table">
 <table style="width:100%">
         <thead>
         <tr>
@@ -131,7 +132,6 @@
     </tbody>
     </table>
     </div>
-</td>
 
 <h3> Add movies from OMDb API</h3>
 <a title="Add Movie from OMDb API" th:href="@{/admin/omdbmoviesearch}" class="fas fa-plus-square fa-4x">

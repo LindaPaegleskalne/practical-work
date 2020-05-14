@@ -13,13 +13,13 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-public class CategoriesConroller {
+public class CategoriesController {
     private final CategoriesAdminService categoriesAdminService;
     private final MoviesAdminService moviesAdminService;
 
 
     @Autowired
-    public CategoriesConroller(CategoriesAdminService categoriesAdminService, MoviesAdminService moviesAdminService) {
+    public CategoriesController(CategoriesAdminService categoriesAdminService, MoviesAdminService moviesAdminService) {
         this.categoriesAdminService = categoriesAdminService;
         this.moviesAdminService = moviesAdminService;
     }
