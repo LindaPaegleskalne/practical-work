@@ -21,8 +21,15 @@ public class OmdbService {
         return omdbResponse.getMovies();
     }
 
-    public Movie addOmdbMovie(String title) {
+    public Movie cloneMovieFromOmdb(String title) {
         OmdbMovie omdbMovie = omdbResponse.searchByTitle(title);
-        return omdbMovie.addOmdbMovie();
+        Movie movie = new Movie();
+        if(omdbMovie!=null) {
+            movie.setName(omdbMovie.getTitle());
+            movie.setYear(omdbMovie.getYear());
+            movie.setLinkImdb("https://www.imdb.com/title/" + omdbMovie.getImdbID());
+            movie.setLinkPoster(omdbMovie.getPoster().equals("N/A") ? null : omdbMovie.getPoster());
+        }
+        return movie;
     }
 }

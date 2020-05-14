@@ -62,13 +62,6 @@ public class OmdbMovie {
     public void setPoster(String poster) {
         this.poster = poster;
     }
-    public Movie addOmdbMovie(){
-        Movie movie = new Movie();
-        movie.setName(this.title);
-        movie.setYear(this.year);
-        movie.setLinkImdb("https://www.imdb.com/title/" + this.imdbID);
-        movie.setLinkPoster(this.poster);
-        return movie;
-    }
+
 }
 

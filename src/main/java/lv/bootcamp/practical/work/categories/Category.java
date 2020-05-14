@@ -3,6 +3,8 @@ package lv.bootcamp.practical.work.categories;
 import lv.bootcamp.practical.work.movies.Movie;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,7 +13,10 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(unique = true)
+    @NotBlank( message = "Please enter a name")
+    @Size(max = 30, message = "Name cannot be longer than 30 characters")
     private String name;
 
     @OneToMany( mappedBy = "category")

@@ -15,8 +15,9 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Category name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="name"
+                        <input type="text" th:field="*{name}" required = "" class="form-control" id="name"
                                placeholder="Name">
+                        <span th:if = "${#fields.hasErrors('name')}" th:errors = "*{name}" class = "input-error" />
                     </div>
                 </div>
 
