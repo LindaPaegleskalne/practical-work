@@ -17,9 +17,14 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
 
     @Query(value = "SELECT * FROM movies WHERE (:name is null or name LIKE %:name% AND category = :id)",
             nativeQuery = true)
-    Collection<Movie> findByNameAndId(@Param("name") String name, @Param("id") Integer category);
+    Page<Movie> findByNameAndId(@Param("name") String name, @Param("id") Integer category, Pageable pageRequest);
 
     @Query(value = "SELECT * FROM movies WHERE category = :id",
             nativeQuery = true)
-    Collection<Movie> findByCategoryId(@Param("id") Integer category);
+    Page<Movie> findByCategoryId(@Param("id") Integer category, Pageable pageRequest);
+
+    @Query(value = "SELECT * FROM movies WHERE (:name is null or name LIKE %:name%)",
+            nativeQuery = true)
+    Collection<Movie> findMovieByName(@Param("name") String name);
+
 }

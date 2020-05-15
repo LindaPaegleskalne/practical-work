@@ -1,9 +1,5 @@
 package lv.bootcamp.practical.work.movies;
 
-import lv.bootcamp.practical.work.categories.Category;
-import lv.bootcamp.practical.work.categories.CategoryRepository;
-import lv.bootcamp.practical.work.movies.Movie;
-import lv.bootcamp.practical.work.movies.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,21 +14,18 @@ public class MoviesAdminService {
     private static final Integer DEFAULT_PAGE_SIZE = 5;
 
     private final MovieRepository movieRepository;
-    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public MoviesAdminService(MovieRepository movieRepository, CategoryRepository categoryRepository) {
+    public MoviesAdminService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-        this.categoryRepository = categoryRepository;
     }
-
-
 
     public Page<Movie> startPage(String search, Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
                 DEFAULT_PAGE_SIZE, Sort.by("name"));
         return movieRepository.findByName(search, pageable);
     }
+
     public Page<Movie> defaultStartPage() {
         Pageable pageable = PageRequest.of(DEFAULT_PAGE_NR - 1, DEFAULT_PAGE_SIZE, Sort.by("name"));
         return movieRepository.findByName("", pageable);

@@ -8,6 +8,14 @@
 <body>
 <h1>Movies page</h1>
 
+<p class="my-5">
+<form th:action="@{/search}" method="get">
+    <input type="text" name="search" id="search" th:value="${movies}"/>
+    <input type="submit" value="Search"/>
+</form>
+</p>
+
+
 <th:block th:each="category : ${categories}">
     <h2><a th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
     <span th:if="${#lists.isEmpty(category.movies)}">Sorry, there are no movies in this category!</span>

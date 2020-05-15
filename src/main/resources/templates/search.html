@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<table style="width:40%">
+<tbody th:each="movie : ${movies}">
+<tr>
+    <td style="padding:5px" rowspan="3">
+    <a th:title="${movie.name}">
+        <img th:src="@{${movie.linkPoster}}" width="80" height="150" alt="${movie.name}"/>
+    </a></td>
+    <td th:text="${movie.name}"></td>
+</tr>
+<tr>
+    <td th:text="${movie.year}"></td>
+</tr>
+<tr>
+    <td th:text="${movie.description}"></td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

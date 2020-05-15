@@ -5,14 +5,21 @@ import lv.bootcamp.practical.work.categories.CategoryRepository;
 import lv.bootcamp.practical.work.movies.Movie;
 import lv.bootcamp.practical.work.movies.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
 public class MoviesService {
+    private static final Integer DEFAULT_PAGE_NR = 1;
+    private static final Integer DEFAULT_PAGE_SIZE = 5;
 
     private final MovieRepository movieRepository;
 
@@ -21,13 +28,23 @@ public class MoviesService {
         this.movieRepository = movieRepository;
     }
 
-    public Iterable<Movie> findMoviesByCategory(int id, String search){
-        Collection<Movie> movies;
+    public Iterable<Movie> findMoviesByCategory(Integer id, String search, Optional<Integer> page){
+        Page<Movie> movies;
+        Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
+                DEFAULT_PAGE_SIZE, Sort.by("name"));
         if (isBlank(search)) {
-            movies = movieRepository.findByCategoryId(id);
+            movies = movieRepository.findByCategoryId(id, pageable);
         } else {
-            movies = movieRepository.findByNameAndId(search, id);
+            movies = movieRepository.findByNameAndId(search, id, pageable);
         }
         return movies;
     }
+
+    public Iterable<Movie> findMovieByName (String search) {
+        Collection<Movie> movies;
+            movies = movieRepository.findMovieByName(search);
+        return movies;
+    }
+
+
 }
