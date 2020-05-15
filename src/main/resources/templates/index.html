@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Movies page</h1>
+<div th:insert="fragments/menu :: menu"></div>
 
 <p class="my-5">
 <form th:action="@{/search}" method="get">
@@ -29,6 +30,6 @@
     </tr>
     </span>
 </th:block>
-
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
