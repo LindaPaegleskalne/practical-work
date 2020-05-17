@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
-    <h1>Movies page</h1>
+<div class="container">
     <div th:insert="fragments/menu :: menu"></div>
 
     <p class="my-5">
@@ -15,35 +15,29 @@
         <input type="text" name="search" id="search" th:value="${search}"/>
         <input type="submit" value="Search"/>
     </form>
-    </p>
-
-<th:block th:each="movie : ${movies}">
     <div class="movie-element">
-        <div class="movie-info">
-            <a th:href="@{/movie/{id}(id = ${movie.id})}">
+        <div class="movie-details">
                 <span th:if="${#strings.isEmpty(movie.linkPoster)}">
                     <img th:src="@{/images/movie.png}" alt="movie"/>
                 </span>
                 <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
                     <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
                 </span>
-            </a>
         </div>
-        <div class="movie-info rating">
-            <a th:href="@{/movie/{id}(id = ${movie.id})}">
+        <div class="movie-details rating">
                 <h2><p th:text="${movie.name}"></p></h2>
+                <h6><a  th:href="@{/category/{id}(id = ${movie.category.id})}"><span th:text="${movie.category.name}"></span></a></h6>
                 <h5><p th:text="${movie.year}"></p></h5>
                 <div class="rating">
                     <img th:src="@{/images/star.png}" alt="star"/>
                     <span th:text="${movie.rating}"></span>
                 </div>
-            </a>
+        </div>
+        <div>
+            <p th:text="${movie.description}"></p>
         </div>
     </div>
-</th:block>
-
-<div th:insert="fragments/footer :: footer"></div>
-
+    <div th:insert="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

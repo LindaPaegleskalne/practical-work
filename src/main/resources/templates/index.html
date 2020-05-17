@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Movies page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
+<div class="container">
 <h1>Movies page</h1>
 <div th:insert="fragments/menu :: menu"></div>
 
@@ -15,21 +17,29 @@
     <input type="submit" value="Search"/>
 </form>
 </p>
-
-
-<th:block th:each="category : ${categories}">
-    <h2><a th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
-    <span th:if="${#lists.isEmpty(category.movies)}">Sorry, there are no movies in this category!</span>
-
+    <th:block th:each="category : ${categories}">
+        <div id="category-row">
     <span th:unless="${#lists.isEmpty(category.movies)}">
+        <h2><a id="category-link" th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
     <tr th:each="movie, iterStat : ${category.movies}" th:if="${iterStat.index} <5">
-        <a th:href="@{${movie.linkImdb}}">
-            <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
-        </a>
-
+        <div id="movie-box">
+            <a th:href="@{/movie/{id}(id = ${movie.id})}">
+                <span th:if="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:src="@{/images/movie.png}" alt="movie"/>
+                </span>
+                <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
+                </span>
+                <p th:text="${movie.name}"></p>
+            </a>
+        </div>
+        </div>
     </tr>
     </span>
-</th:block>
+    </th:block>
+
+
 <div th:insert="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>
