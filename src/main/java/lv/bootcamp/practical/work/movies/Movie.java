@@ -32,6 +32,7 @@ public class Movie{
     private Float rating;
 
     @Column(name = "link_imdb")
+    @NotBlank(message = "Please enter an IMDB link for movie")
     @URL(message = "URL is not valid")
     private String linkImdb;
 

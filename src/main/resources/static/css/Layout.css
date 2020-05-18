@@ -1,6 +1,23 @@
 body{
   background-color: #E6DFDF;
 }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+}
+tr{
+align: center;
+}
+form label{
+font-weight: bold;
+font-size: larger;
+}
+.fas, .btn-primary  {
+ color: #222533;
+ background-color: #E6DFDF;
+ border-color: #222533;
+}
 #category-link{
   margin-left: 30px;
   color: #1C1C1B;
