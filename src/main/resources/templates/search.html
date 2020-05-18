@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
+<div th:insert="fragments/menu :: navbar-user"></div>
 <table style="width:40%">
-<tbody th:each="movie : ${movies}">
+<tbody th:each="movie : ${moviesAll}">
 <tr>
     <td style="padding:5px" rowspan="3">
     <a th:title="${movie.name}">
@@ -24,6 +24,6 @@
 </tr>
 </tbody>
 </table>
-
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

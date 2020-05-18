@@ -30,7 +30,7 @@ public class MoviesController {
 
     @GetMapping("/search")
     public String searchResults(@RequestParam String search, Model model) {
-        model.addAttribute("movies", moviesService.findMovieByName(search));
+        model.addAttribute("moviesAll", moviesService.findMovieByName(search));
         model.addAttribute("search", search);
         return "search";
     }

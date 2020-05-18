@@ -6,16 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1>Movies page</h1>
-<div th:insert="fragments/menu :: menu"></div>
-
-<p class="my-5">
-<form th:action="@{/search}" method="get">
-    <input type="text" name="search" id="search" th:value="${movies}"/>
-    <input type="submit" value="Search"/>
-</form>
-</p>
-
+<div th:insert="fragments/menu :: navbar-user"></div>
 
 <th:block th:each="category : ${categories}">
     <h2><a th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>

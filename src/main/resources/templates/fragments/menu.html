@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="menu">
-    <a th:href="@{/}">main</a>
-    <a th:href="@{/admin}">admin</a>
-    <a th:href="@{/admin/signupmovie}">add movie</a>
-    <a th:href="@{/admin/signupcategory}">add category</a>
+<div th:fragment="navbar-user">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <div class="navbar-brand">
+        <a class="text-white" th:href="@{/}">Movies page</a>
+    </div>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a th:href="@{/}" class="nav-item nav-link active">Home</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <form class="form-inline ml-auto" th:action="@{/search}" method="get">
+            <input type="text" class="form-control mr-sm-2" placeholder="search" name="search"  id="search" th:value="${moviesAll}"/>
+            <input type="submit" class="btn btn-outline-light" value="Search"/>
+        </form>
+    </div>
 </nav>
+</div>
+
+
+<div th:fragment="navbar-admin" >
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-brand">
+            <a class="text-white" th:href="@{/}">Movies page</a>
+        </div>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#AdminNavbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="AdminNavbarCollapse">
+                <div class="navbar-nav">
+                    <a th:href="@{/admin}" class="nav-item nav-link active">Admin</a>
+                    <a th:href="@{/admin/signupmovie}" class="nav-item nav-link active">Add movie</a>
+                    <a th:href="@{/admin/signupcategory}" class="nav-item nav-link active">Add category</a>
+                </div>
+        </div>
+    </nav>
+</div>
 </body>
 </html>

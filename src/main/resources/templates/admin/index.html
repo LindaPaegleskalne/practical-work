@@ -14,13 +14,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 
-<body data-spy="scroll" data-offset="60" data-target="#myNavbar">
-<h1>Movies Page</h1>
-<div id="topnav" style="text-align:right;" >
-    <a th:href="@{/admin}">admin main</a>
-    <a th:href="@{/admin/signupmovie}">add movie</a>
-    <a th:href="@{/admin/signupcategory}">add category</a>
-</div>
+<body>
+<div th:insert="fragments/menu :: navbar-admin"></div>
 <h3>Categories</h3>
 
 <p class="my-5">
@@ -142,6 +137,6 @@
 <a title="Add Movie from OMDb API" th:href="@{/admin/omdbmoviesearch}" class="fas fa-plus-square fa-4x">
     <i class="fas fa-movie-plus-square"></i>
 </a>
-
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
