@@ -63,16 +63,13 @@ margin-bottom: 25px;
   vertical-align: top;
 }
 .movie-details img{
-  width: 250px;
-  height: 400px;
+  width: 200px;
+  height: 330px;
   border-radius: 8px;
-  padding: 10px;
+  padding: 5px;
 }
 .movie-details a{
   color: #B7A3A3;
-}
-.movie-details a:hover{
-  text-decoration: none;
 }
 .rating span{
   font-size: 20px;

@@ -26,7 +26,10 @@
         </div>
         <div class="movie-details rating">
                 <h2><p th:text="${movie.name}"></p></h2>
-                <h6><a  th:href="@{/category/{id}(id = ${movie.category.id})}"><span th:text="${movie.category.name}"></span></a></h6>
+                <h6><a  th:href="@{/category/{id}(id = ${movie.category.id})}"><span th:text="${movie.category.name}"></span></a>
+                    <span> | </span>
+                    <a  th:href="@{${movie.linkImdb}}">IMDb page</a>
+                </h6>
                 <h5><p th:text="${movie.year}"></p></h5>
                 <div class="rating">
                     <img th:src="@{/images/star.png}" alt="star"/>
