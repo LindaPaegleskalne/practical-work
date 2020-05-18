@@ -8,9 +8,8 @@
 
 </head>
 <body>
+<div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
-<h1>Movies in category:</h1>
-<div th:insert="fragments/menu :: menu"></div>
     <h2><td th:text="${category.name}" ></h2>
 
 <p class="my-5">
@@ -74,5 +73,6 @@
 </nav>
     </span>
 </div>
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

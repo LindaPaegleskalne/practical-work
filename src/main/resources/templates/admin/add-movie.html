@@ -10,12 +10,6 @@
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
-    <h2 class="mb-5">Add Movie</h2>
-    <div id="topnav" style="text-align:right;" >
-        <a th:href="@{/admin}">admin main</a>
-        <a th:href="@{/admin/signupmovie}">add movie</a>
-        <a th:href="@{/admin/signupcategory}">add category</a>
-    </div>
     <div class="row">
         <div class="col-md-6">
             <form action="#" th:action="@{/admin/addmovie}" th:object="${movie}"
@@ -80,6 +74,6 @@
         </div>
     </div>
 </div>
-
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

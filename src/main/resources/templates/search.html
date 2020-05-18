@@ -7,18 +7,17 @@
     <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
+<div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
-    <h1>Movies page</h1>
-    <div th:insert="fragments/menu :: menu"></div>
 
-    <p class="my-5">
-    <form th:action="@{/search}" method="get">
-        <input type="text" name="search" id="search" th:value="${search}"/>
-        <input type="submit" value="Search"/>
-    </form>
-    </p>
+<!--    <p class="my-5">-->
+<!--    <form th:action="@{/search}" method="get">-->
+<!--        <input type="text" name="search" id="search" th:value="${searchAll}"/>-->
+<!--        <input type="submit" value="Search"/>-->
+<!--    </form>-->
+<!--    </p>-->
 
-<th:block th:each="movie : ${movies}">
+<th:block th:each="movie : ${moviesAll}">
     <div class="movie-element">
         <div class="movie-info">
             <a th:href="@{/movie/{id}(id = ${movie.id})}">
@@ -43,8 +42,7 @@
     </div>
 </th:block>
 
-<div th:insert="fragments/footer :: footer"></div>
-
 </div>
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
