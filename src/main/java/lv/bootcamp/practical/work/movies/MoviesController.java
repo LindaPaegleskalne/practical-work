@@ -43,6 +43,12 @@ public class MoviesController {
         model.addAttribute("search", search);
         return "category";
     }
+    @GetMapping("/movie/{id}")
+    public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model){
+        Movie movie = moviesService.findByIdMovie(id);
+        model.addAttribute("movie", movie);
+        return "movie";
+    }
 
 }
 

@@ -45,6 +45,8 @@ public class MoviesService {
             movies = movieRepository.findMovieByName(search);
         return movies;
     }
-
-
+    public Movie findByIdMovie(Integer id) {
+        return movieRepository.findById(id).
+                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+    }
 }

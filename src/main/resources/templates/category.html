@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>category</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 
 </head>
 <body>
-<div th:insert="fragments/menu :: navbar-user"></div>
+<div class="container">
 <h1>Movies in category:</h1>
+<div th:insert="fragments/menu :: menu"></div>
     <h2><td th:text="${category.name}" ></h2>
 
 <p class="my-5">
@@ -22,30 +24,30 @@
 
     <span th:unless="${#lists.isEmpty(movies)}">
 
-        <table style="width:100%">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Year</th>
-            <th>Description</th>
-            <th>Rating</th>
-            <th>Poster</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="movie : ${movies}">
-            <td th:text="${movie.name}"></td>
-            <td th:text="${movie.year}"></td>
-            <td th:text="${movie.description}"></td>
-            <td th:text="${movie.rating}"></td>
-            <td>
-                <a th:href="@{${movie.linkImdb}}">
-                <img th:src="@{${movie.linkPoster}}" width="200" height="330" alt="${movie.name}"/>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-        </table>
+<th:block th:each="movie : ${movies}">
+    <div class="movie-element">
+        <div class="movie-info">
+            <a th:href="@{/movie/{id}(id = ${movie.id})}">
+                <span th:if="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:src="@{/images/movie.png}" alt="movie"/>
+                </span>
+                <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
+                </span>
+            </a>
+        </div>
+        <div class="movie-info rating">
+            <a th:href="@{/movie/{id}(id = ${movie.id})}">
+                <h2><p th:text="${movie.name}"></p></h2>
+                <h5><p th:text="${movie.year}"></p></h5>
+                <div class="rating">
+                    <img th:src="@{/images/star.png}" alt="star"/>
+                    <span th:text="${movie.rating}"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+</th:block>
 
 
     <nav aria-label="Pagination" th:if="${movies.totalPages gt 0}">
@@ -71,6 +73,6 @@
     </ul>
 </nav>
     </span>
-<div th:insert="fragments/footer :: footer"></div>
+</div>
 </body>
 </html>
