@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>add-category</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
-<div class="container my-5">
+<div class="container">
     <h2 class="mb-5">Add Category</h2>
-
+    <div id="topnav" style="text-align:right;" >
+        <a th:href="@{/admin}">admin main</a>
+        <a th:href="@{/admin/signupmovie}">add movie</a>
+        <a th:href="@{/admin/signupcategory}">add category</a>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <form action="#" th:action="@{/admin/addcategory}" th:object="${category}"
@@ -31,6 +36,5 @@
         </div>
     </div>
 </div>
-<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Add Omdb Movie</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
-<div class="container my-5">
+<div class="container">
     <h2 class="mb-5">Add Omdb Movie</h2>
     <div class="row">
         <div class="col-md-6">
@@ -74,6 +75,5 @@
         </div>
     </div>
 </div>
-<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
