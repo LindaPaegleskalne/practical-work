@@ -10,13 +10,6 @@
 <div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
 
-
-<p class="my-5">
-<form th:action="@{/search}" method="get">
-    <input type="text" name="search" id="search" th:value="${movies}"/>
-    <input type="submit" value="Search"/>
-</form>
-</p>
     <th:block th:each="category : ${categories}">
         <div id="category-row">
     <span th:unless="${#lists.isEmpty(category.movies)}">

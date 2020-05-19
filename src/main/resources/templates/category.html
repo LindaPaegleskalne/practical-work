@@ -14,7 +14,7 @@
 
 <p class="my-5">
 <form th:action="@{/category/{id}(id = ${category.id})}" method="get">
-    <input type="text" name="search" id="search" th:value="${search}"/>
+    <input type="text" name="search" id="search" th:value="${search}" placeholder="search in category"/>
     <input type="submit" value="Search"/>
 </form>
 </p>
