@@ -16,7 +16,7 @@ font-size: larger;
 .fas, .btn-primary  {
  color: #222533;
  background-color: #E6DFDF;
- border-color: #222533;
+ border-color: #E6DFDF;
 }
 #category-link{
   margin-left: 30px;
@@ -96,4 +96,27 @@ margin-bottom: 25px;
   margin-bottom: 10px;
   width: 33px;
   height: 33px;
+}
+.error_bubble {
+    font-family: Arial, helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 33px;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    margin: 30px 170px 0 370px;
+    padding: 50px;
+    background: none repeat scroll 0% 0% #413E3E;
+    border: 1px solid #413E3E;
+}
+.error_arrow {
+    border-color: #413E3E transparent transparent transparent;
+    border-style: solid;
+    border-width: 21px 31px 0px 0px;
+    height: 0;
+    left: 700px;
+    line-height: 0;
+    position: relative;
+    top: -1px;
+    width: 0;
 }

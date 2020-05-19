@@ -1,54 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Omdb Movies</title>
-<style>
-    table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    }
-</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
-<h3>Search movies in OMDb API</h3>
+    <h3>Search movies in OMDb API</h3>
 
-<p class="my-5">
-<form action="#" th:action="@{/admin/omdbmoviesearch}" method="get">
-    <input type="text" name="search" id="search" th:value="${search}"/>
-    <input type="submit" value="Search"/>
-</form>
-</p>
-<h2 class="my-5">Omdb Movies</h2>
-<table style="width:100%">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Year</th>
-        <th>Imdb ID</th>
-        <th>Poster</th>
-        <th>Add</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="movie : ${omdbMovies}">
-        <td th:text="${movie.title}"></td>
-        <td th:text="${movie.year}"></td>
-        <td th:text="${movie.imdbID}"></td>
-        <td>
-                <img th:src="@{${movie.poster}}" width="200" height="330" alt="${movie.title}"/>
-        </td>
-        <td align="center">
-            <a th:href="@{/admin/editomdbmovie/{title}(title=${movie.title})}" class="btn btn-primary">
-                <i class="far fa-plus-square fa-3x"></i>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <p class="form-group">
+    <form action="#" th:action="@{/admin/omdbmoviesearch}" method="get">
+        <input type="text" class="form-control" name="search" id="search" th:value="${search}"/>
+        <a th:href="@{/admin}" class="btn btn-secondary" role="button">Back</a>
+        <input type="submit" class="btn btn-dark" value="Search">
+    </form>
+    </p>
+
+    <th:block th:each="movie : ${omdbMovies}">
+        <div class="movie-element">
+            <div class="movie-info">
+                <a th:href="@{/admin/editomdbmovie/{title}(title=${movie.title})}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+            <div class="movie-info">
+                <span th:if="${#strings.contains(movie.poster,'N/A')}">
+                    <img th:src="@{/images/movie.png}" alt="movie"/>
+                </span>
+                <span th:unless="${#strings.contains(movie.poster,'N/A')}">
+                    <img th:title="${movie.title}" th:src="@{${movie.poster}}" alt="${movie.title}0"/>
+                </span>
+            </div>
+            <div class="movie-info">
+                <h2><p th:text="${movie.title}"></p></h2>
+                <h5><p th:text="${movie.year}"></p></h5>
+            </div>
+        </div>
+    </th:block>
 </div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>

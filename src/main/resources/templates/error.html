@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/Layout.css}" />
+</head>
+<body>
+<div class="container">
+
+    <div id="error" class="error_code_404">
+        <div class="error_bubble">
+            <div class="error_text">There's nothing here.</div>
+        </div>
+        <div class="error_arrow"></div>
+        <div class="clear"></div>
+    </div>
+    <img th:src="@{/images/Travolta.gif}" alt="Travolta looking for something?"/>
+    <a class="btn btn-secondary" th:href="@{/}">Go Home</a>
+</div>
+
+</body>
+</html>

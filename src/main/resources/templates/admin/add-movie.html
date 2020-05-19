@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Imdb link</label>
-                        <input type="text" th:field="*{linkImdb}" class="form-control" id="linkImdb"
+                        <input type="text" th:field="*{linkImdb}" required = "" class="form-control" id="linkImdb"
                                placeholder="Imdb link">
                         <span th:if = "${#fields.hasErrors('linkImdb')}" th:errors = "*{linkImdb}" class = "input-error" />
                     </div>
@@ -67,7 +67,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Add Movie">
+                        <a th:href="@{/admin}" class="btn btn-secondary" role="button">Back</a>
+                        <input type="submit" class="btn btn-dark" value="Add Movie">
                     </div>
                 </div>
             </form>
