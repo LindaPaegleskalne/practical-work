@@ -7,8 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/Layout.css}" />
 </head>
 <body>
+<div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
-    <div th:insert="fragments/menu :: menu"></div>
+
 
     <p class="my-5">
     <form th:action="@{/search}" method="get">
