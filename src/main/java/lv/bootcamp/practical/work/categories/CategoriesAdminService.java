@@ -1,8 +1,11 @@
 package lv.bootcamp.practical.work.categories;
 
-import lv.bootcamp.practical.work.movies.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
+import javax.naming.NameAlreadyBoundException;
 
 @Service
 public class CategoriesAdminService {
@@ -23,8 +26,12 @@ public class CategoriesAdminService {
                 orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
     }
 
-    public Category createCategory(Category category) {
-        categoryRepository.save(category);
+    public Object createCategory(Category category) {
+        try {
+            categoryRepository.save(category);
+        } catch (DataIntegrityViolationException e) {
+            return new DuplicateKeyException("category name already exists");
+        }
         return category;
     }
 

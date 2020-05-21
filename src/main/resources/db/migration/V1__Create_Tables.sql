@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS categories (
   id INT(15)  AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30)
+  name VARCHAR(30),
+  UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS movies (
@@ -12,5 +13,6 @@ CREATE TABLE IF NOT EXISTS movies (
   link_imdb VARCHAR(300),
   link_poster VARCHAR(300),
   category INT(15) NOT NULL,
+  CONSTRAINT UC_movies UNIQUE (name, year),
   FOREIGN KEY (category) REFERENCES categories(id)
   );

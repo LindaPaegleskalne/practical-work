@@ -1,6 +1,8 @@
 package lv.bootcamp.practical.work.movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,8 +38,12 @@ public class MoviesAdminService {
                 orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
     }
 
-    public Movie createMovie(Movie movie) {
-        movieRepository.save(movie);
+    public Object createMovie(Movie movie) {
+        try {
+            movieRepository.save(movie);
+        } catch (DataIntegrityViolationException e) {
+            return new DuplicateKeyException("category name already exists");
+        }
         return movie;
     }
 
