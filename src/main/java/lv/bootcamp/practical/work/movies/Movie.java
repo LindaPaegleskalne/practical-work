@@ -5,7 +5,10 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "movies",  uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "year"})})
@@ -21,6 +24,8 @@ public class Movie{
     @NotNull
     @Range( min = 1888l, max = 2020l, message = "Year must be from 1888 to 2020")
     private Short year;
+
+    private Integer views = 0;
 
     @Column(name = "description", columnDefinition = "TEXT")
     @Size(max = 500, message = "Description cannot exceed 500 characters in lenght")
@@ -67,6 +72,14 @@ public class Movie{
 
     public void setYear(Short year) {
         this.year = year;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
     }
 
     public String getDescription() {

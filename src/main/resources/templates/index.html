@@ -9,13 +9,30 @@
 <body>
 <div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
-
-    <th:block th:each="category : ${categories}">
-        <div id="category-row">
+    <span th:unless="${#lists.isEmpty(popularMovies)}">
+        <div class="category-row">
+        <h2>Top 5 movies</h2>
+	    <th:block th:each="movie : ${popularMovies}">
+            <div class="movie-box">
+                <a th:href="@{/movie/{id}(id = ${movie.id})}">
+                    <span th:if="${#strings.isEmpty(movie.linkPoster)}">
+                        <img th:src="@{/images/movie.png}" alt="movie"/>
+                    </span>
+                    <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
+                        <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
+                    </span>
+                    <p th:text="${movie.name}"></p>
+                </a>
+            </div>
+        </th:block>
+    </div>
+    </span>
+        <th:block th:each="category : ${categories}">
+            <div class="category-row">
     <span th:unless="${#lists.isEmpty(category.movies)}">
-        <h2><a id="category-link" th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
+        <h2><a class="category-link" th:href="@{/category/{id}(id = ${category.id})}"><span th:text="${category.name}"></span></a></h2>
     <tr th:each="movie, iterStat : ${category.movies}" th:if="${iterStat.index} <5">
-        <div id="movie-box">
+        <div class="movie-box">
             <a th:href="@{/movie/{id}(id = ${movie.id})}">
                 <span th:if="${#strings.isEmpty(movie.linkPoster)}">
                     <img th:src="@{/images/movie.png}" alt="movie"/>
@@ -26,10 +43,10 @@
                 <p th:text="${movie.name}"></p>
             </a>
         </div>
-        </div>
-    </tr>
-    </span>
-    </th:block>
+
+            </tr>
+            </div>
+        </th:block>
 
 </div>
 <div th:insert="fragments/footer :: footer"></div>
