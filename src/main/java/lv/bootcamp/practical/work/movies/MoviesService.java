@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import static org.apache.logging.log4j.util.Strings.isBlank;
@@ -45,8 +47,15 @@ public class MoviesService {
             movies = movieRepository.findMovieByName(search);
         return movies;
     }
-    public Movie findByIdMovie(Integer id) {
-        return movieRepository.findById(id).
+
+    public Movie findAndIncrementById(Integer id) {
+        Movie movie = movieRepository.findById(id).
                 orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+        movieRepository.incrementMovieViews(id, 1);
+        return movie;
+    }
+
+    public List<Movie> popularMovies(){
+        return movieRepository.findTop5ByOrderByViewsDesc();
     }
 }

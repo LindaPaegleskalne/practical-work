@@ -10,10 +10,12 @@
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
-    <h3>Search movies in OMDb API</h3>
+    <div class="form-title">
+        <h2>Search movie in OMDb API</h2>
+    </div>
 
     <p class="form-group">
-    <form action="#" th:action="@{/admin/omdbmoviesearch}" method="get">
+    <form class="search-form" action="#" th:action="@{/admin/omdbmoviesearch}" method="get">
         <input type="text" class="form-control" name="search" id="search" th:value="${search}"/>
         <a th:href="@{/admin}" class="btn btn-secondary" role="button">Back</a>
         <input type="submit" class="btn btn-dark" value="Search">

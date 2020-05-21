@@ -9,13 +9,15 @@
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
-    <h2 class="mb-5">Update Category</h2>
+    <div class="form-title">
+        <h2>Update category</h2>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <form action="#" th:action="@{/admin/updatecategory/{id}}" th:object="${category}"
                   method="post">
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col">
                         <label for="name" class="col-form-label">Category name</label>
                         <input type="text" th:field="*{name}" required = "" class="form-control" id="name"
                                placeholder="Name">
@@ -23,9 +25,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 mt-5">
+                <div class="col mt-5">
                     <a th:href="@{/admin}" class="btn btn-secondary" role="button">Back</a>
-                    <input type="submit" class="btn btn-dark" value="Update Category">
+                    <input type="submit" class="btn btn-dark" value="Submit">
                 </div>
             </form>
         </div>

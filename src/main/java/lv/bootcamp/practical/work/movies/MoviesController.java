@@ -25,6 +25,7 @@ public class MoviesController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("categories", categoriesService.findAllCategories());
+        model.addAttribute("popularMovies", moviesService.popularMovies());
         return "index";
     }
 
@@ -43,9 +44,10 @@ public class MoviesController {
         model.addAttribute("search", search);
         return "category";
     }
+
     @GetMapping("/movie/{id}")
     public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model){
-        Movie movie = moviesService.findByIdMovie(id);
+        Movie movie = moviesService.findAndIncrementById(id);
         model.addAttribute("movie", movie);
         return "movie";
     }

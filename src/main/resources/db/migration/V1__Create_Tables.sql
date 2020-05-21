@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS movies (
   id INT(15) AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150),
   year SMALLINT(4),
+  views INT(15) DEFAULT 0,
   description TEXT(500),
   rating FLOAT(2,1),
   link_imdb VARCHAR(300),

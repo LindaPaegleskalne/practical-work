@@ -9,8 +9,12 @@
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
+
+    <div class="form-title">
+        <h2>Add new movie</h2>
+    </div>
     <h2 class="mb-5">Add Omdb Movie</h2>
-    <div class="row">
+    <div class="row add-form">
         <div class="col-md-6">
             <form action="#" th:action="@{/admin/addomdbmovie/{title}(title=${movie.name})}" th:object="${movie}"
                   method="post">
@@ -69,7 +73,7 @@
                 <div class="row">
                     <div class="col-md-6 mt-5">
                         <a th:href="@{/admin/omdbmoviesearch}" class="btn btn-secondary" role="button">Back</a>
-                        <input type="submit" class="btn btn-dark" value="Add Movie">
+                        <input type="submit" class="btn btn-dark" value="Submit">
                     </div>
                 </div>
             </form>

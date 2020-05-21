@@ -10,12 +10,6 @@
 <div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
 
-
-    <p class="my-5">
-    <form th:action="@{/search}" method="get">
-        <input type="text" name="search" id="search" th:value="${search}"/>
-        <input type="submit" value="Search"/>
-    </form>
     <div class="movie-element">
         <div class="movie-details">
                 <span th:if="${#strings.isEmpty(movie.linkPoster)}">
@@ -25,7 +19,7 @@
                     <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
                 </span>
         </div>
-        <div class="movie-details rating">
+        <div class="movie-details">
                 <h2><p th:text="${movie.name}"></p></h2>
                 <h6><a  th:href="@{/category/{id}(id = ${movie.category.id})}"><span th:text="${movie.category.name}"></span></a>
                     <span> | </span>
