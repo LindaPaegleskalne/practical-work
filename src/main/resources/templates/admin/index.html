@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <title>admin</title>
     <style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 15px;
-    }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/Layout.css}" />
@@ -16,48 +11,15 @@
 </head>
 
 <body>
-<div th:insert="fragments/menu :: navbar-admin"></div>
-<h3>Categories</h3>
-
-<p class="my-5">
-    <a title="add category" href="/admin/signupcategory"class="fas fa-plus-square fa-4x">
-        <i class="fas fa-movie-plus-square"></i>
-    </a>
-</p>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr align="center" th:each="category : ${categories}">
-        <td th:text="${category.name}"></td>
-        <td>
-            <a title="edit" th:href="@{/admin/editcategory/{id}(id=${category.id})}" class="fas fa-edit fa-lg">
-                <i class="icon-fixed-width icon-pencil"></i>
-            </a>
-        </td>
-        <td>
-            <a title="delete" th:href="@{/admin/deletecategory/{id}(id=${category.id})}" class="fas fa-trash-alt fa-lg">
-                <i class="fas fa-movie-trash-alt fa-2x"></i></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<hr>
-
-<h3>Movies</h3>
-
-<p class="my-5">
-    <a title="add movie" href="/admin/signupmovie"class="fas fa-plus-square fa-4x">
-        <i class="fas fa-movie-plus-square"></i>
-    </a>
-</p>
+<div class="menu" th:insert="fragments/menu :: navbar-admin"></div>
+<div class="container">
+    <div class="title">
+        <h2>Movies</h2>
+        <h6><a  th:href="@{/admin/signupmovie}">Add movie</a>
+            <span> | </span>
+            <a  th:href="@{/admin/omdbmoviesearch}">Add movie from OMDb API</a>
+        </h6>
+    </div>
 
 <nav id="myNavbar" aria-label="Pagination" th:if="${movies.totalPages gt 0}">
     <ul class="pagination justify-content-center font-weight-bold">
@@ -83,12 +45,12 @@
     </ul>
 </nav>
 
-<div align="center">
-    <th:block th:text="${movies.totalElements}"></th:block><p>movies found</p>
+<div id="movie-count">
+    <th:block th:text="${movies.totalElements}"></th:block><span> movies found</span>
 </div>
 
 <div id="table">
-<table style="width:100%">
+<table>
         <thead>
         <tr>
             <th>Category</th>
@@ -127,10 +89,35 @@
     </table>
     </div>
 
-<h3> Add movies from OMDb API</h3>
-<a title="Add Movie from OMDb API" th:href="@{/admin/omdbmoviesearch}" class="fas fa-plus-square fa-4x">
-    <i class="fas fa-movie-plus-square"></i>
-</a>
+    <div class="title">
+        <h2>Categories</h2>
+        <h6><a  th:href="@{/admin/signupcategory}">Add category</a></h6>
+    </div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr align="center" th:each="category : ${categories}">
+        <td th:text="${category.name}"></td>
+        <td>
+            <a title="edit" th:href="@{/admin/editcategory/{id}(id=${category.id})}" class="fas fa-edit fa-lg">
+                <i class="icon-fixed-width icon-pencil"></i>
+            </a>
+        </td>
+        <td>
+            <a title="delete" th:href="@{/admin/deletecategory/{id}(id=${category.id})}" class="fas fa-trash-alt fa-lg">
+                <i class="fas fa-movie-trash-alt fa-2x"></i></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

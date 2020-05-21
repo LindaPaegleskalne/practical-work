@@ -19,7 +19,7 @@
                     <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
                 </span>
         </div>
-        <div class="movie-details rating">
+        <div class="movie-details">
                 <h2><p th:text="${movie.name}"></p></h2>
                 <h6><a  th:href="@{/category/{id}(id = ${movie.category.id})}"><span th:text="${movie.category.name}"></span></a>
                     <span> | </span>

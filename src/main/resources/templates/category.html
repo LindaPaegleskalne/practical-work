@@ -10,12 +10,14 @@
 <body>
 <div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
+    <div class="title">
     <h2><td th:text="${category.name}" ></h2>
+    </div>
 
 <p class="my-5">
-<form th:action="@{/category/{id}(id = ${category.id})}" method="get">
-    <input type="text" name="search" id="search" th:value="${search}" placeholder="search in category"/>
-    <input type="submit" value="Search"/>
+<form class="form-inline ml-auto search-form" th:action="@{/category/{id}(id = ${category.id})}" method="get">
+    <input type="text" class="form-control mr-sm-2" name="search" id="search" th:value="${search}" placeholder="search in category"/>
+    <input type="submit" class="btn btn-dark" value="Search"/>
 </form>
 </p>
 
@@ -35,7 +37,7 @@
                 </span>
             </a>
         </div>
-        <div class="movie-info rating">
+        <div class="movie-info">
             <a th:href="@{/movie/{id}(id = ${movie.id})}">
                 <h2><p th:text="${movie.name}"></p></h2>
                 <h5><p th:text="${movie.year}"></p></h5>

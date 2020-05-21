@@ -18,7 +18,7 @@
     <div class="form-group">
         <form class="form-inline ml-auto" th:action="@{/search}" method="get">
             <input type="text" class="form-control mr-sm-2" placeholder="search" name="search"  id="search" th:value="${search}"/>
-            <input type="submit" value="Search movies"/>
+            <input type="submit" class="btn btn-light" value="Search movies"/>
         </form>
     </div>
 </nav>
@@ -43,7 +43,7 @@
         <div class="form-group">
             <form class="form-inline ml-auto" th:action="@{/admin#myNavbar}" method="get">
                 <input type="text" class="form-control mr-sm-2" placeholder="search" name="search"  id="searchAdm" th:value="${search}"/>
-                <input type="submit" value="Search movies"/>
+                <input type="submit" class="btn btn-light" value="Search movies"/>
             </form>
         </div>
     </nav>

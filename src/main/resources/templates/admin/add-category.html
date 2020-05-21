@@ -10,8 +10,12 @@
 <body>
 <div th:insert="fragments/menu :: navbar-admin"></div>
 <div class="container">
+
+    <div class="form-title">
+        <h2>Add new category</h2>
+    </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col">
             <form action="#" th:action="@{/admin/addcategory}" th:object="${category}"
                   method="post">
                 <div class="row">
@@ -23,9 +27,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 mt-5">
+                <div class="col mt-5">
                     <a th:href="@{/admin}" class="btn btn-secondary" role="button">Back</a>
-                    <input type="submit" class="btn btn-dark" value="Add Category">
+                    <input type="submit" class="btn btn-dark" value="Submit">
                 </div>
             </form>
         </div>
