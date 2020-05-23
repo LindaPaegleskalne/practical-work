@@ -15,6 +15,7 @@ public class CategoriesService {
     public Iterable<Category> findAllCategories() {
         return categoryRepository.findAll();
     }
+
     public Category findCategory(int id){
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID: "+ id));

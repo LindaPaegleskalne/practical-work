@@ -34,7 +34,7 @@
                     <img th:src="@{/images/movie.png}" alt="movie"/>
                 </span>
                 <span th:unless="${#strings.contains(movie.poster,'N/A')}">
-                    <img th:title="${movie.title}" th:src="@{${movie.poster}}" th:alt="${movie.title}0"/>
+                    <img th:title="${movie.title}" th:src="@{${movie.poster}}" th:alt="${movie.title}"/>
                 </span>
             </div>
             <div class="movie-info">
