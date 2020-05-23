@@ -6,12 +6,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 import java.util.List;
 import java.util.Optional;
+
 import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MoviesServiceTest {
@@ -26,23 +32,40 @@ public class MoviesServiceTest {
     @Test
     public void findMoviesByCategory() {
         Integer id = 1;
-        Pageable pageable = mock(Pageable.class);
-        List<Movie> movies = asList(
-                movie (1, "A", (short) 2000, 7.0f, "description",
-                        "link1", "link2", category(1, "a")),
-                movie (2, "B", (short) 2001, 7.2f, "description",
-                        "link1", "link2", category(1, "a")));
+        String search = "";
+        Pageable pageable = PageRequest.of(0,5, Sort.by("name"));
+        Page<Movie> movies = mock(Page.class);
 
+        when(movieRepository.findByCategoryId(id, pageable)).thenReturn(movies);
 
+        assertThat(moviesService.findMoviesByCategory(id, search, Optional.of(1))).isEqualTo(movies);
+
+        verify(movieRepository).findByCategoryId(id, pageable);
+        verifyNoMoreInteractions(movieRepository);
+    }
+
+    @Test
+    public void findMoviesByNameAndCategory(){
+        Integer id = 1;
+        String search = "name";
+        Pageable pageable = PageRequest.of(0,5, Sort.by("name"));
+        Page<Movie> movies = mock(Page.class);
+
+        when(movieRepository.findByNameAndId(search, id,  pageable)).thenReturn(movies);
+
+        assertThat(moviesService.findMoviesByCategory(id, search, Optional.of(1))).isEqualTo(movies);
+
+        verify(movieRepository).findByNameAndId(search, id,  pageable);
+        verifyNoMoreInteractions(movieRepository);
     }
 
     @Test
     public void findMovieByName() {
         String search = "foo";
         List<Movie> movies = asList(
-                movie (1, "A", (short) 2000, 7.0f, "description",
+                movie (1, "foo a", (short) 2000, 4,7.0f, "description",
                         "link1", "link2", category(1, "a")),
-                movie (2, "B", (short) 2001, 7.2f, "description",
+                movie (2, "foo b", (short) 2001, 3, 7.2f, "description",
                         "link1", "link2", category(1, "a")));
 
         when(movieRepository.findMovieByName(search)).thenReturn(movies);
@@ -56,9 +79,18 @@ public class MoviesServiceTest {
     @Test
     public void findAndIncrementById() {
         Integer id = 1;
+        int increment = 1;
+        Movie movie = movie (1, "A", (short) 2000, 0, 7.0f, "description",
+                        "link1", "link2", category(1, "a"));
 
+        when(movieRepository.findById(id)).thenReturn(Optional.of(movie));
+        when(movieRepository.incrementMovieViews(id, increment)).thenReturn(1);
 
-        //when(movieRepository.findById(id)).thenReturn();
+        assertThat(moviesService.findAndIncrementById(id)).isEqualTo(movie);
+
+        verify(movieRepository).findById(id);
+        verify(movieRepository).incrementMovieViews(id, increment);
+        verifyNoMoreInteractions(movieRepository);
     }
 
     @Test
@@ -74,13 +106,12 @@ public class MoviesServiceTest {
         verifyNoMoreInteractions(movieRepository);
     }
 
-
     @Test
     public void popularMovies() {
         List<Movie> movies = asList(
-                movie (1, "A", (short) 2000, 7.0f, "description",
+                movie (1, "A", (short) 2000, 4, 7.0f, "description",
                         "link1", "link2", category(1, "a")),
-                movie (2, "B", (short) 2001, 7.2f, "description",
+                movie (2, "B", (short) 2001,3, 7.2f, "description",
                         "link1", "link2", category(1, "a")));
 
         when(movieRepository.findTop5ByOrderByViewsDesc()).thenReturn(movies);
@@ -92,12 +123,13 @@ public class MoviesServiceTest {
     }
 
 
-    private Movie movie(Integer id, String name, Short year, Float rating, String description,
+    private Movie movie(Integer id, String name, Short year, Integer views, Float rating, String description,
                         String linkImdb, String poster, Category category) {
         Movie movie = new Movie();
         movie.setId(id);
         movie.setName(name);
         movie.setYear(year);
+        movie.setViews(views);
         movie.setRating(rating);
         movie.setDescription(description);
         movie.setLinkImdb(linkImdb);
