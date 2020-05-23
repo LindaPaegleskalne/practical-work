@@ -16,7 +16,7 @@ public class OmdbService {
         this.omdbGateway = omdbGateway;
     }
 
-    public List<OmdbMovie> findOmdbMovies(String search){
+    public List<OmdbMovie> findOmdbMovies(String search) {
         omdbResponse = omdbGateway.movies(search);
         return omdbResponse.getMovies();
     }
