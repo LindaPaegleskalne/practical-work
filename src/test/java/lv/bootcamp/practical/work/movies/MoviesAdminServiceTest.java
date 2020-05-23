@@ -41,15 +41,14 @@ public class MoviesAdminServiceTest {
 
     @Test
     public void getDefaultStartPage() {
-        String search = "";
         Pageable pageable = PageRequest.of(0,5, Sort.by("name"));
         Page<Movie> movies = mock(Page.class);
 
-        when(movieRepository.findByName(search, pageable)).thenReturn(movies);
+        when(movieRepository.findByName("", pageable)).thenReturn(movies);
 
-        assertThat(moviesAdminService.startPage(search, Optional.of(1))).isEqualTo(movies);
+        assertThat(moviesAdminService.defaultStartPage()).isEqualTo(movies);
 
-        verify(movieRepository).findByName(search, pageable);
+        verify(movieRepository).findByName("", pageable);
         verifyNoMoreInteractions(movieRepository);
     }
 
