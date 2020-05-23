@@ -72,7 +72,7 @@
             <td th:text="${movie.rating}"></td>
             <td style="padding:5px">
                 <a th:title="${movie.name}" th:href="@{${movie.linkImdb}}">
-                    <img th:src="@{${movie.linkPoster}}" width="80" height="150" alt="${movie.name}"/>
+                    <img th:src="@{${movie.linkPoster}}" width="80" height="150" th:alt="${movie.name}"/>
                 </a>
             </td>
             <td>

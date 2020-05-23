@@ -5,8 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NameAlreadyBoundException;
-
 @Service
 public class CategoriesAdminService {
 
@@ -21,9 +19,15 @@ public class CategoriesAdminService {
         return categoryRepository.findAll();
     }
 
-    public Category findByIdCategory(Integer id) {
-        return categoryRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("Invalid category ID: "+ id));
+    public Object findByIdCategory(Integer id) {
+        Category category;
+        try {
+            category = categoryRepository.findById(id).
+                    orElseThrow(() -> new IllegalArgumentException("Invalid category ID: " + id));
+        } catch (DataIntegrityViolationException e) {
+            return new DuplicateKeyException("category name already exists");
+        }
+        return category;
     }
 
     public Object createCategory(Category category) {

@@ -44,7 +44,7 @@ public class CategoriesController {
 
     @GetMapping("/admin/editcategory/{id}")
     public String showUpdateFormCategory(@PathVariable("id") int id, Model model){
-        Category category =  categoriesAdminService.findByIdCategory(id);
+        Object category =  categoriesAdminService.findByIdCategory(id);
         model.addAttribute("category", category);
         return "admin/update-category";
     }
@@ -63,8 +63,8 @@ public class CategoriesController {
 
     @GetMapping("/admin/deletecategory/{id}")
     public String deleteCategory(@PathVariable("id") int id, Model model){
-        Category category = categoriesAdminService.findByIdCategory(id);
-        categoriesAdminService.deleteCategory(category);
+        Object category = categoriesAdminService.findByIdCategory(id);
+        categoriesAdminService.deleteCategory((Category) category);
         model.addAttribute("movies", moviesAdminService.defaultStartPage());
         model.addAttribute("searchStr", "");
         model.addAttribute("categories", categoriesAdminService.findAllCategory());

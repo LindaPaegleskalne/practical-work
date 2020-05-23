@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/admin/updatecategory/{id}}" th:object="${category}"
+            <form action="#" th:action="@{/admin/updatecategory/{id}(id = ${category.id})}" th:object="${category}"
                   method="post">
                 <div class="row">
                     <div class="form-group col">
