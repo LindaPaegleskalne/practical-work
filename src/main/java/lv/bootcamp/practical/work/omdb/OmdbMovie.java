@@ -1,13 +1,10 @@
 package lv.bootcamp.practical.work.omdb;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lv.bootcamp.practical.work.movies.Movie;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import java.util.Objects;
 
 @JsonNaming(PropertyNamingStrategy.UpperCamelCaseStrategy.class)
 
@@ -63,5 +60,21 @@ public class OmdbMovie {
         this.poster = poster;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OmdbMovie omdbMovie = (OmdbMovie) o;
+        return year == omdbMovie.year &&
+                title.equals(omdbMovie.title) &&
+                imdbID.equals(omdbMovie.imdbID) &&
+                type.equals(omdbMovie.type) &&
+                poster.equals(omdbMovie.poster);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, year, imdbID, type, poster);
+    }
 }
 
