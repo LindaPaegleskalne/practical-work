@@ -14,7 +14,7 @@
         <h2>Add new movie</h2>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <form action="#" th:action="@{/admin/addmovie}" th:object="${movie}"
                   method="post">
                 <div class="row">
@@ -31,28 +31,10 @@
                         <span th:if = "${#fields.hasErrors('year')}" th:errors = "*{year}" class = "input-error" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Description</label>
-                        <input type="text" th:field="*{description}" class="form-control" id="description"
-                               placeholder="Description">
-                        <span th:if = "${#fields.hasErrors('description')}" th:errors = "*{description}" class = "input-error" />
-                    </div>
-                    <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Rating</label>
                         <input type="number" step="0.1" th:field="*{rating}" required = "" class="form-control" id="rating"
                                placeholder="Rating">
                         <span th:if = "${#fields.hasErrors('rating')}" th:errors = "*{rating}" class = "input-error" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Imdb link</label>
-                        <input type="text" th:field="*{linkImdb}" required = "" class="form-control" id="linkImdb"
-                               placeholder="Imdb link">
-                        <span th:if = "${#fields.hasErrors('linkImdb')}" th:errors = "*{linkImdb}" class = "input-error" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Poster link</label>
-                        <input type="text" th:field="*{linkPoster}"class="form-control" id="linkPoster"
-                               placeholder="Poster link">
-                        <span th:if = "${#fields.hasErrors('linkPoster')}" th:errors = "*{linkPoster}" class = "input-error" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Category</label>
@@ -67,6 +49,25 @@
                         </select>
                         <span th:if = "${#fields.hasErrors('category')}" th:errors = "*{category}" class = "input-error" />
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Imdb link</label>
+                        <input type="text" th:field="*{linkImdb}" required = "" class="form-control" id="linkImdb"
+                               placeholder="Imdb link">
+                        <span th:if = "${#fields.hasErrors('linkImdb')}" th:errors = "*{linkImdb}" class = "input-error" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Poster link</label>
+                        <input type="text" th:field="*{linkPoster}"class="form-control" id="linkPoster"
+                               placeholder="Poster link">
+                        <span th:if = "${#fields.hasErrors('linkPoster')}" th:errors = "*{linkPoster}" class = "input-error" />
+                    </div>
+
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="name" class="col-form-label">Description</label>
+                    <textarea id="w3mission" class="form-control" rows="4" cols="125"  th:field="*{description}">
+                    </textarea>
+                    <span th:if = "${#fields.hasErrors('description')}" th:errors = "*{description}" class = "input-error" />
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">

@@ -137,7 +137,7 @@ padding-left:30px;
   font-weight: bold;
 }
 #table{
-width : 100%;
+    width : 100%;
 }
 .error_bubble {
     font-family: Arial, helvetica, sans-serif;
@@ -166,6 +166,14 @@ footer {
     text-align: center;
     position: fixed;
     bottom: 0;
+
     width: 100%;
     height: 24px;
+    left: 0;
+}
+.search-wrap {
+    margin-bottom: 0;
+}
+#w3mission {
+    max-width: 100%;
 }
