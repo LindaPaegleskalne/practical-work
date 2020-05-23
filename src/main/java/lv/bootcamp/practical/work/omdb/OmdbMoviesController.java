@@ -43,6 +43,7 @@ public class OmdbMoviesController {
     @PostMapping("/admin/addomdbmovie/{title}")
     public String addOmdbMovie (@PathVariable("title") String title, @Valid Movie movie, BindingResult bindingResult, Model model) {
             if(bindingResult.hasErrors()) {
+                model.addAttribute("categories", categoriesAdminService.findAllCategory());
                 return "admin/add-omdb-movie";
             }
         moviesAdminService.createMovie(movie);
