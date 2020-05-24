@@ -28,24 +28,24 @@ public class OmdbMoviesController {
     }
 
     @GetMapping("/admin/omdbmoviesearch")
-    public String omdbMovieSearch(@RequestParam(required = false) String search, Model model){
+    public String omdbMovieSearch(@RequestParam(required = false) String search, Model model) {
         model.addAttribute("omdbMovies", omdbService.findOmdbMovies(search));
         return "admin/omdb-movies";
     }
 
     @GetMapping("/admin/editomdbmovie/{title}")
-    public String showUpdateFormOmdbMovie(@PathVariable("title") String title, Model model){
+    public String showUpdateFormOmdbMovie(@PathVariable("title") String title, Model model) {
         model.addAttribute("movie", omdbService.findOmdbMovieByTitle(title));
         model.addAttribute("categories", categoriesAdminService.findAllCategory());
         return "admin/add-omdb-movie";
     }
 
     @PostMapping("/admin/addomdbmovie/{title}")
-    public String addOmdbMovie (@PathVariable("title") String title, @Valid Movie movie, BindingResult bindingResult, Model model) {
-            if(bindingResult.hasErrors()) {
-                model.addAttribute("categories", categoriesAdminService.findAllCategory());
-                return "admin/add-omdb-movie";
-            }
+    public String addOmdbMovie(@PathVariable("title") String title, @Valid Movie movie, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoriesAdminService.findAllCategory());
+            return "admin/add-omdb-movie";
+        }
         moviesAdminService.createMovie(movie);
         model.addAttribute("movies", moviesAdminService.defaultStartPage());
         model.addAttribute("searchStr", "");

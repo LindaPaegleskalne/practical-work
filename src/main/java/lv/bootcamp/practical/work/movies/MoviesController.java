@@ -46,7 +46,7 @@ public class MoviesController {
     }
 
     @GetMapping("/movie/{id}")
-    public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model){
+    public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model) {
         Movie movie = moviesService.findAndIncrementById(id);
         model.addAttribute("movie", movie);
         return "movie";

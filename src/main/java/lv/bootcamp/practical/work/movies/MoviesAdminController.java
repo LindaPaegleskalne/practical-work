@@ -28,7 +28,7 @@ public class MoviesAdminController {
 
     @GetMapping("/admin")
     public String admin(@RequestParam(required = false) String search, Model model,
-                        @RequestParam(required = false) Optional<Integer> page){
+                        @RequestParam(required = false) Optional<Integer> page) {
         model.addAttribute("categories", categoriesAdminService.findAllCategory());
         model.addAttribute("searchStr", search);
         model.addAttribute("movies", moviesAdminService.startPage(search, page));
@@ -36,14 +36,14 @@ public class MoviesAdminController {
     }
 
     @GetMapping("/admin/signupmovie")
-    public String showSignUpFormMovie(Movie movie, Model model){
+    public String showSignUpFormMovie(Movie movie, Model model) {
         model.addAttribute("categories", categoriesAdminService.findAllCategory());
         return "admin/add-movie";
     }
 
     @PostMapping("/admin/addmovie")
-    public String addMovie(@Valid Movie movie, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()) {
+    public String addMovie(@Valid Movie movie, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoriesAdminService.findAllCategory());
             return "admin/add-movie";
         }
@@ -55,7 +55,7 @@ public class MoviesAdminController {
     }
 
     @GetMapping("/admin/editmovie/{id}")
-    public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model){
+    public String showUpdateFormMovie(@PathVariable("id") Integer id, Model model) {
         Movie movie = moviesAdminService.findByIdMovie(id);
         model.addAttribute("movie", movie);
         model.addAttribute("categories", categoriesAdminService.findAllCategory());
@@ -63,8 +63,8 @@ public class MoviesAdminController {
     }
 
     @PostMapping("/admin/updatemovie/{id}")
-    public String updateMovie (@PathVariable("id") Integer id, @Valid Movie movie, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
+    public String updateMovie(@PathVariable("id") Integer id, @Valid Movie movie, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "admin/update-movie";
         }
         moviesAdminService.createMovie(movie);
@@ -75,7 +75,7 @@ public class MoviesAdminController {
     }
 
     @GetMapping("/admin/deletemovie/{id}")
-    public String deleteMovie(@PathVariable("id") Integer id, Model model){
+    public String deleteMovie(@PathVariable("id") Integer id, Model model) {
         Movie movie = moviesAdminService.findByIdMovie(id);
         moviesAdminService.deleteMovie(movie);
         model.addAttribute("movies", moviesAdminService.defaultStartPage());

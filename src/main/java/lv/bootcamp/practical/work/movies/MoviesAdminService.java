@@ -35,7 +35,7 @@ public class MoviesAdminService {
 
     public Movie findByIdMovie(Integer id) {
         return movieRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: " + id));
     }
 
     public Object createMovie(Movie movie) {

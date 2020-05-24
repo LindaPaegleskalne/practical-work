@@ -24,15 +24,15 @@ public class OmdbService {
 
     public Movie findOmdbMovieByTitle(String title) {
         Movie movie = new Movie();
-        for( OmdbMovie omdbMovie : omdbResponse.getMovies()){
-            if(omdbMovie.getTitle().equals(title)){
+        for (OmdbMovie omdbMovie : omdbResponse.getMovies()) {
+            if (omdbMovie.getTitle().equals(title)) {
                 movie = returnMovie(omdbMovie);
             }
         }
         return movie;
     }
 
-    public Movie returnMovie(OmdbMovie omdbMovie){
+    public Movie returnMovie(OmdbMovie omdbMovie) {
         Movie movie = new Movie();
         movie.setName(omdbMovie.getTitle());
         movie.setYear(omdbMovie.getYear());

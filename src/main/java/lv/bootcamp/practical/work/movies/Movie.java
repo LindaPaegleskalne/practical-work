@@ -13,17 +13,17 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "movies",  uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "year"})})
-public class Movie{
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank( message = "Please enter a name")
+    @NotBlank(message = "Please enter a name")
     @Size(max = 150, message = "Name cannot be longer than 150 characters")
     private String name;
 
     @NotNull
-    @Range( min = 1888l, max = 2020l, message = "Year must be from 1888 to 2020")
+    @Range(min = 1888L, max = 2020L, message = "Year must be from 1888 to 2020")
     private Short year;
 
     private Integer views = 0;
@@ -33,7 +33,7 @@ public class Movie{
     private String description;
 
     @NotNull
-    @Range( min = 1l, max = 10l, message = "Rating must be from 1 to 10")
+    @Range(min = 1L, max = 10L, message = "Rating must be from 1 to 10")
     @Digits(integer = 2, fraction = 1, message = "The rating can only have one decimal place")
     private Float rating;
 
@@ -51,7 +51,7 @@ public class Movie{
     @NotNull(message = "Please choose category")
     private Category category;
 
-      public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -125,13 +125,21 @@ public class Movie{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Movie movie = (Movie) o;
-        return  name.equals(movie.name) &&
-                year.equals(movie.year) &&
-                views.equals(movie.views) &&
-                linkImdb.equals(movie.linkImdb) &&
+        return  name.equals(movie.name)
+                &&
+                year.equals(movie.year)
+                &&
+                views.equals(movie.views)
+                &&
+                linkImdb.equals(movie.linkImdb)
+                &&
                 linkPoster.equals(movie.linkPoster);
     }
 

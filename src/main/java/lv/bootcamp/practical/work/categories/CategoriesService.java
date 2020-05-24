@@ -16,9 +16,9 @@ public class CategoriesService {
         return categoryRepository.findAll();
     }
 
-    public Category findCategory(int id){
+    public Category findCategory(int id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid ID: "+ id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
         return category;
     }
 }

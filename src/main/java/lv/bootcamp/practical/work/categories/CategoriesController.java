@@ -23,13 +23,13 @@ public class CategoriesController {
     }
 
     @GetMapping("/admin/signupcategory")
-    public String showSignUpFormCategory(Category category){
+    public String showSignUpFormCategory(Category category) {
         return "admin/add-category";
     }
 
     @PostMapping("/admin/addcategory")
-    public String addCategory(@Valid Category category, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()) {
+    public String addCategory(@Valid Category category, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "admin/add-category";
         }
         categoriesAdminService.createCategory(category);
@@ -40,15 +40,15 @@ public class CategoriesController {
     }
 
     @GetMapping("/admin/editcategory/{id}")
-    public String showUpdateFormCategory(@PathVariable("id") int id, Model model){
-        Object category =  categoriesAdminService.findByIdCategory(id);
+    public String showUpdateFormCategory(@PathVariable("id") int id, Model model) {
+        Object category = categoriesAdminService.findByIdCategory(id);
         model.addAttribute("category", category);
         return "admin/update-category";
     }
 
     @PostMapping("/admin/updatecategory/{id}")
-    public String updateCategory (@PathVariable("id") int id, @Valid Category category, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
+    public String updateCategory(@PathVariable("id") int id, @Valid Category category, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "admin/update-category";
         }
         categoriesAdminService.createCategory(category);
@@ -59,7 +59,7 @@ public class CategoriesController {
     }
 
     @GetMapping("/admin/deletecategory/{id}")
-    public String deleteCategory(@PathVariable("id") int id, Model model){
+    public String deleteCategory(@PathVariable("id") int id, Model model) {
         Object category = categoriesAdminService.findByIdCategory(id);
         categoriesAdminService.deleteCategory((Category) category);
         model.addAttribute("movies", moviesAdminService.defaultStartPage());

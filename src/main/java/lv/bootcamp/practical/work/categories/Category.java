@@ -15,11 +15,11 @@ public class Category {
     private Integer id;
 
     @Column(unique = true)
-    @NotBlank( message = "Please enter a name")
+    @NotBlank(message = "Please enter a name")
     @Size(max = 30, message = "Name cannot be longer than 30 characters")
     private String name;
 
-    @OneToMany( mappedBy = "category")
+    @OneToMany(mappedBy = "category")
     private Set<Movie> movies;
 
     public Integer getId() {

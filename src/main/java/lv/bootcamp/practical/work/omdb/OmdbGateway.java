@@ -14,7 +14,7 @@ public class OmdbGateway {
         this.restTemplate = restTemplate;
     }
 
-    public OmdbResponse movies(String name){
+    public OmdbResponse movies(String name) {
         UriComponents uri = UriComponentsBuilder.newInstance()
                 .scheme("http").host("www.omdbapi.com")
                 .queryParam("apikey", "d4df4065")

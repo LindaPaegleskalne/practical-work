@@ -30,7 +30,7 @@ public class MoviesService {
         this.movieRepository = movieRepository;
     }
 
-    public Iterable<Movie> findMoviesByCategory(Integer id, String search, Optional<Integer> page){
+    public Iterable<Movie> findMoviesByCategory(Integer id, String search, Optional<Integer> page) {
         Page<Movie> movies;
         Pageable pageable = PageRequest.of(page.orElse(DEFAULT_PAGE_NR) - 1,
                 DEFAULT_PAGE_SIZE, Sort.by("name"));
@@ -42,15 +42,15 @@ public class MoviesService {
         return movies;
     }
 
-    public Iterable<Movie> findMovieByName (String search) {
+    public Iterable<Movie> findMovieByName(String search) {
         Collection<Movie> movies;
-            movies = movieRepository.findMovieByName(search);
+        movies = movieRepository.findMovieByName(search);
         return movies;
     }
 
     public Movie findAndIncrementById(Integer id) {
         Movie movie = movieRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: "+ id));
+                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: " + id));
         movieRepository.incrementMovieViews(id, 1);
         return movie;
     }
