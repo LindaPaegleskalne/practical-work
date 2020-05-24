@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,7 +26,7 @@ public class OmdbServiceTest {
         String search = "foo";
         when(omdbGateway.movies(search)).thenReturn(omdbResponse);
         List<OmdbMovie> actual = omdbService.findOmdbMovies(search);
-        assertEquals(omdbResponse.getMovies(), actual);
+        assertThat(actual).isEqualTo(omdbResponse.getMovies());
         verify(omdbGateway).movies(search);
         verifyNoMoreInteractions(omdbGateway);
     }
@@ -40,7 +40,7 @@ public class OmdbServiceTest {
         Movie expected = movie("foo", (short)1989, "https://www.imdb.com/title/imdbId1", "link1");
         when(omdbResponse.getMovies()).thenReturn(omdbMovies);
         Movie actual = omdbService.findOmdbMovieByTitle(title);
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -48,8 +48,7 @@ public class OmdbServiceTest {
         OmdbMovie omdbMovie = omdbMovie("foo", (short)1989, "imdbId1" , "m", "link1");
         Movie expected = movie("foo", (short)1989, "https://www.imdb.com/title/imdbId1", "link1");
         Movie actual = omdbService.returnMovie(omdbMovie);
-        assertEquals(expected, actual);
-
+        assertThat(actual).isEqualTo(expected);
     }
 
     private OmdbMovie omdbMovie(String title, Short year, String imdbId, String type, String poster) {
