@@ -22,8 +22,8 @@ public class CategoriesAdminService {
     public Object findByIdCategory(Integer id) {
         Category category;
         try {
-            category = categoryRepository.findById(id).
-                    orElseThrow(() -> new IllegalArgumentException("Invalid category ID: " + id));
+            category = categoryRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid category ID: " + id));
         } catch (DataIntegrityViolationException e) {
             return new DuplicateKeyException("category name already exists");
         }

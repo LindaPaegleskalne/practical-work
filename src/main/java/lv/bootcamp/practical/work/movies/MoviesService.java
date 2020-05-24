@@ -49,13 +49,13 @@ public class MoviesService {
     }
 
     public Movie findAndIncrementById(Integer id) {
-        Movie movie = movieRepository.findById(id).
-                orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: " + id));
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: " + id));
         movieRepository.incrementMovieViews(id, 1);
         return movie;
     }
 
-    public List<Movie> popularMovies(){
+    public List<Movie> popularMovies() {
         return movieRepository.findTop5ByOrderByViewsDesc();
     }
 }
