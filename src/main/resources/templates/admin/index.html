@@ -42,16 +42,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr align="center" th:each="movie : ${movies}">
+        <tr th:each="movie : ${movies}">
             <td th:text="${movie.category.name}"></td>
             <td th:text="${movie.name}"></td>
             <td th:text="${movie.year}"></td>
             <td th:text="${movie.description}"></td>
             <td th:text="${movie.rating}"></td>
-            <td style="padding:5px">
-                <a th:title="${movie.name}" th:href="@{${movie.linkImdb}}">
-                    <img th:src="@{${movie.linkPoster}}" width="80" height="150" th:alt="${movie.name}"/>
-                </a>
+            <td>
+                <div class="movie-info">
+                <span th:if="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:src="@{/images/movie.png}" alt="movie"/>
+                </span>
+                <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
+                    <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
+                </span>
+                </div>
             </td>
             <td>
                 <a title="edit" th:href="@{/admin/editmovie/{id}(id=${movie.id})}" class="fas fa-edit fa-lg">

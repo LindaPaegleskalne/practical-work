@@ -1,5 +1,6 @@
 package lv.bootcamp.practical.work.omdb;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
@@ -9,6 +10,7 @@ public class OmdbMovie {
 
     private String title;
     private short year;
+    @JsonProperty("imdbID")
     private String imdbID;
     private String type;
     private String poster;
@@ -52,9 +54,5 @@ public class OmdbMovie {
                 imdbID.equals(omdbMovie.imdbID) &&
                 type.equals(omdbMovie.type) &&
                 poster.equals(omdbMovie.poster);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, year, imdbID, type, poster);
     }
 }

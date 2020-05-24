@@ -67,12 +67,12 @@ public class OmdbMoviesControllerTest {
         Movie movie = movie(1, title, (short) 2000, 4.0f,
                 "abc", "link1", "link2", category(1, "a"));
 
-        when(omdbService.cloneMovieFromOmdb(title)).thenReturn(movie);
+        when(omdbService.findOmdbMovieByTitle(title)).thenReturn(movie);
 
         String actual = omdbMoviesController.showUpdateFormOmdbMovie(title, model);
         assertThat(actual).isEqualTo("admin/add-omdb-movie");
 
-        verify(omdbService).cloneMovieFromOmdb(title);
+        verify(omdbService).findOmdbMovieByTitle(title);
     }
 
     @Test

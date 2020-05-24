@@ -30,13 +30,6 @@
                         <input type="number" th:field="*{year}" required = "" class="form-control" id="year"
                                placeholder="Year">
                         <span th:if = "${#fields.hasErrors('year')}" th:errors = "*{year}" class = "input-error" />
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Description</label>
-                        <input type="text" th:field="*{description}" class="form-control" id="description"
-                               placeholder="Description">
-                        <span th:if = "${#fields.hasErrors('description')}" th:errors = "*{description}" class = "input-error" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Rating</label>
@@ -45,30 +38,37 @@
                         <span th:if = "${#fields.hasErrors('rating')}" th:errors = "*{rating}" class = "input-error" />
                     </div>
                     <div class="form-group col-md-6">
-                    <label for="name" class="col-form-label">Imdb link</label>
-                    <input type="text" th:field="*{linkImdb}" required = "" class="form-control" id="linkImdb"
-                           placeholder="Imdb link">
-                        <span th:if = "${#fields.hasErrors('linkImdb')}" th:errors = "*{linkImdb}" class = "input-error" />
-                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Poster link</label>
-                        <input type="text" th:field="*{linkPoster}" class="form-control" id="linkPoster"
-                               placeholder="Imdb link">
-                        <span th:if = "${#fields.hasErrors('linkPoster')}" th:errors = "*{linkPoster}" class = "input-error" />
-                    </div>
-                    <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Category</label>
-                        <select required = "" class="form-control" id="category" name="category">
-                        <option value="">Select category</option>
-                        <option
-                                th:each="category : ${categories}"
-                                th:value="${category.id}"
-                                th:text="${category.name}">
 
-                        </option>
+                        <select  required = "" class="form-control" id="category" name="category">
+                            <option value="">Select category</option>
+                            <option
+                                    th:each="category : ${categories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name}">
+                            </option>
                         </select>
                         <span th:if = "${#fields.hasErrors('category')}" th:errors = "*{category}" class = "input-error" />
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Imdb link</label>
+                        <input type="text" th:field="*{linkImdb}" required = "" class="form-control" id="linkImdb"
+                               placeholder="Imdb link">
+                        <span th:if = "${#fields.hasErrors('linkImdb')}" th:errors = "*{linkImdb}" class = "input-error" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="name" class="col-form-label">Poster link</label>
+                        <input type="text" th:field="*{linkPoster}"class="form-control" id="linkPoster"
+                               placeholder="Poster link">
+                        <span th:if = "${#fields.hasErrors('linkPoster')}" th:errors = "*{linkPoster}" class = "input-error" />
+                    </div>
+
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="name" class="col-form-label">Description</label>
+                    <textarea id="w3mission" class="form-control" rows="4" cols="125"  th:field="*{description}">
+                    </textarea>
+                    <span th:if = "${#fields.hasErrors('description')}" th:errors = "*{description}" class = "input-error" />
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">

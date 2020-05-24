@@ -35,7 +35,7 @@ public class OmdbMoviesController {
 
     @GetMapping("/admin/editomdbmovie/{title}")
     public String showUpdateFormOmdbMovie(@PathVariable("title") String title, Model model){
-        model.addAttribute("movie", omdbService.cloneMovieFromOmdb(title));
+        model.addAttribute("movie", omdbService.findOmdbMovieByTitle(title));
         model.addAttribute("categories", categoriesAdminService.findAllCategory());
         return "admin/add-omdb-movie";
     }

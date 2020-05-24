@@ -9,6 +9,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "movies",  uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "year"})})
@@ -120,5 +121,22 @@ public class Movie{
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return  name.equals(movie.name) &&
+                year.equals(movie.year) &&
+                views.equals(movie.views) &&
+                linkImdb.equals(movie.linkImdb) &&
+                linkPoster.equals(movie.linkPoster);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, year, views, description, rating, linkImdb, linkPoster, category);
     }
 }

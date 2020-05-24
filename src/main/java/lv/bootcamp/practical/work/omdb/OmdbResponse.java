@@ -15,12 +15,5 @@ public class OmdbResponse {
     public void setMovies(List<OmdbMovie> movies) {
         this.movies = movies;
     }
-    public OmdbMovie searchByTitle(String title){
-        for( OmdbMovie movie : movies){
-            if(movie.getTitle().equals(title)){
-                return movie;
-            }
-        }
-        return null;
-    }
+
 }
