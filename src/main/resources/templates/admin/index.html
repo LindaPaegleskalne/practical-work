@@ -75,19 +75,19 @@
         <ul class="pagination justify-content-center font-weight-bold">
             <li class="page-item" th:classappend="${movies.number eq 0} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/admin#myNavbar(page=${movies.number lt 2 ? 1 : movies.number},search=${searchStr})}"
+                   th:href="@{/admin#table(page=${movies.number lt 2 ? 1 : movies.number},search=${searchStr})}"
                    aria-label="Previous" title="Previous Page" data-toggle="tooltip">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             <li class="page-item" th:classappend="${i eq movies.number + 1} ? 'active'"
                 th:each="i : ${#numbers.sequence( 1, movies.totalPages, 1)}">
-                <a class="page-link" th:href="@{/admin#myNavbar(page=${i},search=${searchStr})}" th:text="${i}"
+                <a class="page-link" th:href="@{/admin#table(page=${i},search=${searchStr})}" th:text="${i}"
                    th:title="${'Page '+ i}" data-toggle="tooltip"></a>
             </li>
             <li class="page-item" th:classappend="${movies.number + 1 eq movies.totalPages} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/admin#myNavbar(page=${movies.number + 2},search=${searchStr})}"
+                   th:href="@{/admin#table(page=${movies.number + 2},search=${searchStr})}"
                    aria-label="Next" title="Next Page" data-toggle="tooltip">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
