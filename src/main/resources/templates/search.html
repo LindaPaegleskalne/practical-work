@@ -10,13 +10,7 @@
 <div th:insert="fragments/menu :: navbar-user"></div>
 <div class="container">
 
-<!--    <p class="my-5">-->
-<!--    <form th:action="@{/search}" method="get">-->
-<!--        <input type="text" name="search" id="search" th:value="${searchAll}"/>-->
-<!--        <input type="submit" value="Search"/>-->
-<!--    </form>-->
-<!--    </p>-->
-
+<span th:if="${#lists.isEmpty(moviesAll)}">Sorry, there are no movies!</span>
 <th:block th:each="movie : ${moviesAll}">
     <div class="movie-element">
         <div class="movie-info">
