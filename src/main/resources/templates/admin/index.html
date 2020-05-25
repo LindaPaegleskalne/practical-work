@@ -54,7 +54,7 @@
                     <img th:src="@{/images/movie.png}" alt="movie"/>
                 </span>
                 <span th:unless="${#strings.isEmpty(movie.linkPoster)}">
-                    <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" alt="${movie.name}"/>
+                    <img th:title="${movie.name}" th:src="@{${movie.linkPoster}}" th:alt="${movie.name}"/>
                 </span>
                 </div>
             </td>
